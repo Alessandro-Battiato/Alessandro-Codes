@@ -18,14 +18,7 @@ const MonitorScreen = ({ children, isInsideMonitor }: MonitorScreenProps) => {
     });
 
     if (!virtualScene.current) {
-        return (
-            <>
-                <mesh position={[0, 1, 0]}>
-                    <planeGeometry args={[1.5, 1]} />
-                    <meshBasicMaterial map={fbo.texture} />
-                </mesh>
-            </>
-        );
+        return null;
     }
 
     return (
