@@ -1,6 +1,6 @@
 import React from "react";
 
-const Portfolio = ({ isInsideMonitor }) => {
+const Portfolio = ({ isInsideMonitor }: { isInsideMonitor: boolean }) => {
     return (
         <div
             className={`bg-red-500 rounded-tr rounded-tl ${
