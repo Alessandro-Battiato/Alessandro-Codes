@@ -6,6 +6,7 @@ import { useGLTFModels } from "@/app/hooks";
 import { useCameraController } from "@/app/hooks";
 import { SceneRendererProps } from "./types";
 import Background from "../Background/Background";
+import ScrollHint from "../ScrollHint/ScrollHint";
 
 const CameraController = ({
     scrollProgress,
@@ -21,37 +22,40 @@ const SceneRenderer = ({ smoothScroll }: SceneRendererProps) => {
     const { monitor, desk } = useGLTFModels();
 
     return (
-        <motion.div
-            style={{
-                opacity: sceneOpacity,
-                position: "fixed",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-            }}
-        >
-            <Canvas camera={{ position: [0, 0.7, 2.5], fov: 40 }}>
-                <ambientLight />
-                <Background />
-                <CameraController scrollProgress={smoothScroll} />
-                <primitive
-                    object={monitor}
-                    scale={8}
-                    position-y={-4.165}
-                    position-z={-9}
-                />
-                <primitive
-                    object={desk}
-                    scale={0.1}
-                    position-y={-8}
-                    position-z={-10}
-                />
-                <MonitorScreen isInsideMonitor={false}>
-                    <Portfolio isInsideMonitor={false} />
-                </MonitorScreen>
-            </Canvas>
-        </motion.div>
+        <>
+            <motion.div
+                style={{
+                    opacity: sceneOpacity,
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                }}
+            >
+                <Canvas camera={{ position: [0, 0.7, 2.5], fov: 40 }}>
+                    <ambientLight />
+                    <Background />
+                    <CameraController scrollProgress={smoothScroll} />
+                    <primitive
+                        object={monitor}
+                        scale={8}
+                        position-y={-4.165}
+                        position-z={-9}
+                    />
+                    <primitive
+                        object={desk}
+                        scale={0.1}
+                        position-y={-8}
+                        position-z={-10}
+                    />
+                    <MonitorScreen isInsideMonitor={false}>
+                        <Portfolio isInsideMonitor={false} />
+                    </MonitorScreen>
+                </Canvas>
+            </motion.div>
+            <ScrollHint />
+        </>
     );
 };
 
