@@ -1,4 +1,5 @@
 import { useFrame, useThree } from "@react-three/fiber";
+import { useReducedMotion } from "@/app/hooks";
 import { useEffect, useMemo } from "react";
 import BackgroundVertexShader from "../../shaders/Background/vertex.glsl";
 import BackgroundFragmentShader from "../../shaders/Background/fragment.glsl";
@@ -6,6 +7,8 @@ import * as THREE from "three";
 
 const Background = () => {
     const { gl, scene, size } = useThree();
+
+    const reduceMotion = useReducedMotion();
 
     const bgScene = useMemo(() => new THREE.Scene(), []);
 
@@ -21,6 +24,7 @@ const Background = () => {
                 u_resolution: {
                     value: new THREE.Vector2(size.width, size.height),
                 },
+                u_reduceMotion: { value: reduceMotion ? 1.0 : 0.0 },
                 u_mouse: { value: new THREE.Vector2(0, 0) },
                 seed: { value: Math.random() },
             },
@@ -29,7 +33,7 @@ const Background = () => {
             depthTest: false,
             depthWrite: false,
         });
-    }, [size]);
+    }, [size, reduceMotion]);
 
     useMemo(() => {
         const geometry = new THREE.PlaneGeometry(2, 2);
@@ -55,13 +59,20 @@ const Background = () => {
     }, [size, shaderMaterial]);
 
     useEffect(() => {
-        const handleMouseMove = (event: MouseEvent) => {
-            const y = size.height - event.clientY;
-            shaderMaterial.uniforms.u_mouse.value.set(event.clientX, y);
-        };
-        window.addEventListener("mousemove", handleMouseMove);
-        return () => window.removeEventListener("mousemove", handleMouseMove);
-    }, [shaderMaterial, size.height]);
+        shaderMaterial.uniforms.u_reduceMotion.value = reduceMotion ? 1.0 : 0.0;
+    }, [reduceMotion, shaderMaterial]);
+
+    useEffect(() => {
+        if (!reduceMotion) {
+            const handleMouseMove = (event: MouseEvent) => {
+                const y = size.height - event.clientY;
+                shaderMaterial.uniforms.u_mouse.value.set(event.clientX, y);
+            };
+            window.addEventListener("mousemove", handleMouseMove);
+            return () =>
+                window.removeEventListener("mousemove", handleMouseMove);
+        }
+    }, [shaderMaterial, size.height, reduceMotion]);
 
     useFrame((_, delta) => {
         shaderMaterial.uniforms.u_time.value += delta;

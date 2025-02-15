@@ -4,6 +4,7 @@ uniform float u_time;
 uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float seed;
+uniform float u_reduceMotion;
 
 varying vec2 vUv;
 
@@ -55,7 +56,7 @@ mat2 rotation2d(float angle) {
 
 // GLSL Color Conversion
 vec3 hsv2rgb(vec3 c) {
-    vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+    vec4 K = vec4(1.0, 2.0/3.0, 1.0/3.0, 3.0);
     vec3 p = abs(fract(c.xxx - K.xyz) * 6.0 - K.www);
     return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
 }
@@ -64,13 +65,16 @@ void main(void)
 {
     vec2 uv = vUv;
 
+    // If user has set reduced motion preferences, slow the background until almost frozen
+    float t = (u_reduceMotion > 0.5) ? 0.0 : u_time;
+
     // Normalize mouse coordinates
-    vec2 mouse = u_mouse / u_resolution;
+    vec2 mouse = (u_reduceMotion > 0.5) ? vec2(0.5, 0.5) : (u_mouse / u_resolution);
     float dist = distance(uv, mouse);
     float strength = smoothstep(0.5, 0.0, dist);
 
     // Use seed for a random color on each refresh
-    float hue = u_time * 0.02 + seed;
+    float hue = t * 0.02 + seed;
 
     vec3 hsv1 = vec3(hue, 0.9, 0.85);
     vec3 hsv2 = vec3(hue + 0.07, 0.85, 0.75);
@@ -83,18 +87,18 @@ void main(void)
 
     float grain = rand(100.0 * uv) * mix(0.2, 0.01, strength);
 
-    vec2 movement = vec2(u_time * 0.01, u_time * -0.01);
-    movement *= rotation2d(u_time * 0.005);
+    vec2 movement = vec2(t * 0.01, t * -0.01);
+    movement *= rotation2d(t * 0.005);
     
     float f = fbm(uv + movement + seed);
     f *= 10.0;
     f += grain;
-    f += u_time * 0.2;
+    f += t * 0.2;
     f = fract(f);
 
     float gap = mix(0.5, 0.01, strength);
     float mixer = smoothstep(0.0, gap, f) - smoothstep(1.0 - gap, 1.0, f);
 
-    vec4 color = mix(color1, color2, mixer);
-    gl_FragColor = color;
+    vec4 finalColor = mix(color1, color2, mixer);
+    gl_FragColor = finalColor;
 }
