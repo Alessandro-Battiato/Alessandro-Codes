@@ -5,6 +5,7 @@ import Portfolio from "../Portfolio/Portfolio";
 import { useGLTFModels } from "@/app/hooks";
 import { useCameraController } from "@/app/hooks";
 import { SceneRendererProps } from "./types";
+import Background from "../Background/Background";
 
 const CameraController = ({
     scrollProgress,
@@ -32,6 +33,7 @@ const SceneRenderer = ({ smoothScroll }: SceneRendererProps) => {
         >
             <Canvas camera={{ position: [0, 0.7, 2.5], fov: 40 }}>
                 <ambientLight />
+                <Background />
                 <CameraController scrollProgress={smoothScroll} />
                 <primitive
                     object={monitor}
