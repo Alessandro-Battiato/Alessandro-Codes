@@ -52,7 +52,7 @@ const Background = () => {
             }
             material.dispose();
         };
-    }, []);
+    }, [bgScene, reduceMotion, size.height, size.width]);
 
     useEffect(() => {
         if (renderTargetRef.current) {
