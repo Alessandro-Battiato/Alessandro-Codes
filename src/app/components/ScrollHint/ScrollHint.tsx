@@ -33,6 +33,7 @@ const ScrollHint = () => {
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
+                            textAlign: "center",
                         }}
                     >
                         <p style={{ color: "#fff", margin: 0 }}>
