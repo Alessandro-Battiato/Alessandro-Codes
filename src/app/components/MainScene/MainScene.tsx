@@ -53,7 +53,6 @@ const MainScene = () => {
                     left: 0,
                     width: "100%",
                     height: "100vh",
-                    background: "#fff",
                     zIndex: 100,
                     overflowY: "auto",
                     pointerEvents: showPortfolio ? "auto" : "none",
@@ -66,7 +65,7 @@ const MainScene = () => {
                     }
                 }}
             >
-                <Portfolio isInsideMonitor={true} />
+                <Portfolio />
             </motion.div>
         </div>
     );

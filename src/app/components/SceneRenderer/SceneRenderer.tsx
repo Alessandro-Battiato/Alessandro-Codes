@@ -6,6 +6,7 @@ import { SceneRendererProps } from "./types";
 import Background from "../Background/Background";
 import ScrollHint from "../ScrollHint/ScrollHint";
 import { Html } from "@react-three/drei";
+import { useEffect, useState } from "react";
 
 const CameraController = ({
     scrollProgress,
@@ -18,13 +19,24 @@ const CameraController = ({
 
 const SceneRenderer = ({ smoothScroll }: SceneRendererProps) => {
     const sceneOpacity = useTransform(smoothScroll, [0.8, 1], [1, 0]);
+
+    const [opacity, setOpacity] = useState(1);
+
+    useEffect(() => {
+        if (sceneOpacity.get() < 0.1) {
+            setOpacity(0);
+        } else {
+            setOpacity(sceneOpacity.get());
+        }
+    }, [sceneOpacity]);
+
     const { monitor, desk } = useGLTFModels();
 
     return (
         <>
             <motion.div
                 style={{
-                    opacity: sceneOpacity,
+                    opacity,
                     position: "fixed",
                     top: 0,
                     left: 0,
