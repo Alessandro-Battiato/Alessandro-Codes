@@ -53,9 +53,6 @@ const SceneRenderer = ({ smoothScroll }: SceneRendererProps) => {
                         occlude
                         rotation-x={-0.175}
                         position={[0, -1.525, -9.85]}
-                        style={{
-                            pointerEvents: "none",
-                        }}
                     >
                         {/*
                             TO DO: You will NOT be rendering the real portfolio component here anymore, instead,

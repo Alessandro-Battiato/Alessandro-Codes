@@ -1,38 +1,31 @@
-import { useEffect } from "react";
+import { useCallback, useRef } from "react";
 import { UseTouchScrollHandlerProps } from "./types";
 
 export const useTouchScrollHandler = ({
-    containerRef,
     scrollProgress,
+    showPortfolio,
 }: UseTouchScrollHandlerProps) => {
-    useEffect(() => {
-        const container = containerRef?.current;
-        if (!container) return;
+    const touchStartYRef = useRef<number>(0);
 
-        let touchStartY = 0;
+    const handleTouchStart = useCallback(
+        (e: React.TouchEvent<HTMLDivElement>) => {
+            touchStartYRef.current = e.touches[0].clientY;
+        },
+        []
+    );
 
-        const handleTouchStart = (e: TouchEvent) => {
-            touchStartY = e.touches[0].clientY;
-        };
-
-        const handleTouchMove = (e: TouchEvent) => {
-            const deltaY = touchStartY - e.touches[0].clientY;
-            touchStartY = e.touches[0].clientY;
+    const handleTouchMove = useCallback(
+        (e: React.TouchEvent<HTMLDivElement>) => {
+            if (showPortfolio) return;
+            const currentY = e.touches[0].clientY;
+            const deltaY = touchStartYRef.current - currentY;
+            touchStartYRef.current = currentY;
 
             const newProgress = scrollProgress.get() + deltaY / 500;
             scrollProgress.set(Math.max(0, Math.min(1, newProgress)));
-        };
+        },
+        [scrollProgress, showPortfolio]
+    );
 
-        container.addEventListener("touchstart", handleTouchStart, {
-            passive: false,
-        });
-        container.addEventListener("touchmove", handleTouchMove, {
-            passive: false,
-        });
-
-        return () => {
-            container.removeEventListener("touchstart", handleTouchStart);
-            container.removeEventListener("touchmove", handleTouchMove);
-        };
-    }, [scrollProgress, containerRef]);
+    return { handleTouchStart, handleTouchMove };
 };

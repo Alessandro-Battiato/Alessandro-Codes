@@ -18,18 +18,23 @@ const MainScene = () => {
 
     const { scrollProgress, smoothScroll, showPortfolio, setShowPortfolio } =
         useScrollProgress();
+
     const handleContainerWheel = useMouseScrollHandler({
         scrollProgress,
         showPortfolio,
-        setShowPortfolio,
     });
 
-    useTouchScrollHandler({ containerRef, scrollProgress });
+    const { handleTouchStart, handleTouchMove } = useTouchScrollHandler({
+        scrollProgress,
+        showPortfolio,
+    });
 
     return (
         <div
             ref={containerRef}
             onWheel={handleContainerWheel}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
             style={{
                 height: "100vh",
                 overflow: showPortfolio ? "auto" : "hidden",
@@ -50,6 +55,15 @@ const MainScene = () => {
                     height: "100vh",
                     background: "#fff",
                     zIndex: 100,
+                    overflowY: "auto",
+                    pointerEvents: showPortfolio ? "auto" : "none",
+                    overscrollBehavior: "contain",
+                }}
+                onScroll={(e) => {
+                    const target = e.target as HTMLDivElement;
+                    if (target.scrollTop <= 0) {
+                        setShowPortfolio(false);
+                    }
                 }}
             >
                 <Portfolio isInsideMonitor={true} />
