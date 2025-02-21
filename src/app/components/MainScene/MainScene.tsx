@@ -1,17 +1,20 @@
 "use client";
 import React, { useRef } from "react";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import {
     useScrollProgress,
     useTouchScrollHandler,
     useMouseScrollHandler,
 } from "../../hooks/index";
-import SceneRenderer from "../SceneRenderer/SceneRenderer";
 import Portfolio from "../Portfolio/Portfolio";
+
+const SceneRenderer = dynamic(() => import("../SceneRenderer/SceneRenderer"), {
+    ssr: false,
+});
 
 const MainScene = () => {
     const containerRef = useRef<HTMLDivElement | null>(null);
-    const overlayRef = useRef<HTMLDivElement | null>(null);
 
     const { scrollProgress, smoothScroll, showPortfolio, setShowPortfolio } =
         useScrollProgress();
@@ -35,26 +38,22 @@ const MainScene = () => {
         >
             <SceneRenderer smoothScroll={smoothScroll} />
 
-            {showPortfolio && (
-                <motion.div
-                    ref={overlayRef}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "100vh",
-                        overflowY: "auto",
-                        background: "#fff",
-                        zIndex: 10,
-                    }}
-                >
-                    <Portfolio isInsideMonitor />
-                </motion.div>
-            )}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: showPortfolio ? 1 : 0 }}
+                exit={{ opacity: 0 }}
+                style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100vh",
+                    background: "#fff",
+                    zIndex: 100,
+                }}
+            >
+                <Portfolio isInsideMonitor={true} />
+            </motion.div>
         </div>
     );
 };
