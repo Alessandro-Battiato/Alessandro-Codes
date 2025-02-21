@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import {
@@ -29,6 +29,20 @@ const MainScene = () => {
         showPortfolio,
     });
 
+    const [isPortfolioInteractive, setIsPortfolioInteractive] = useState(false);
+
+    useEffect(() => {
+        let timeout: NodeJS.Timeout;
+
+        if (showPortfolio) {
+            timeout = setTimeout(() => setIsPortfolioInteractive(true), 300); // Matches fade-in animation duration
+        } else {
+            setIsPortfolioInteractive(false);
+        }
+
+        return () => clearTimeout(timeout);
+    }, [showPortfolio]);
+
     return (
         <div
             ref={containerRef}
@@ -47,6 +61,7 @@ const MainScene = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: showPortfolio ? 1 : 0 }}
                 exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
                 style={{
                     position: "absolute",
                     top: 0,
@@ -54,8 +69,8 @@ const MainScene = () => {
                     width: "100%",
                     height: "100vh",
                     zIndex: 100,
-                    overflowY: "auto",
-                    pointerEvents: showPortfolio ? "auto" : "none",
+                    overflowY: isPortfolioInteractive ? "auto" : "hidden",
+                    pointerEvents: isPortfolioInteractive ? "auto" : "none",
                     overscrollBehavior: "contain",
                 }}
                 onScroll={(e) => {
