@@ -7,9 +7,12 @@ import {
     useTouchScrollHandler,
     useMouseScrollHandler,
 } from "../../hooks/index";
-import Portfolio from "../Portfolio/Portfolio";
 
 const SceneRenderer = dynamic(() => import("../SceneRenderer/SceneRenderer"), {
+    ssr: false,
+});
+
+const Portfolio = dynamic(() => import("../Portfolio/Portfolio"), {
     ssr: false,
 });
 
