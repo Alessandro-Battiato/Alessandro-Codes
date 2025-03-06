@@ -3,14 +3,16 @@ import { useGLTF } from "@react-three/drei";
 export const useGLTFModels = () => {
     const { scene: monitor } = useGLTF("/models/Monitor/Monitor.glb");
     const { scene: desk } = useGLTF("/models/Desk/scene.gltf");
-    const { scene: astronaut, animations } = useGLTF(
-        "/models/Astronaut/MergedModels.glb"
-    );
+    const {
+        scene: astronaut,
+        animations,
+        nodes,
+    } = useGLTF("/models/Astronaut/MergedModels.glb");
 
     return {
         monitor,
         desk,
-        astronautObj: { astronaut, animations },
+        astronautObj: { astronaut, animations, nodes },
     };
 };
 
