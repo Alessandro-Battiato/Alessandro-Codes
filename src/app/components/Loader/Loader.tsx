@@ -4,14 +4,22 @@ import { useProgress } from "@react-three/drei";
 import { motion, AnimatePresence } from "framer-motion";
 import { LoaderProps } from "./types";
 
-const LoaderOverlay = ({ isSceneReady }: LoaderProps) => {
+const Loader: React.FC<LoaderProps> = ({ isSceneReady }) => {
     const { progress } = useProgress();
     const [displayedProgress, setDisplayedProgress] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [dotCount, setDotCount] = useState(1);
 
     useEffect(() => {
         setDisplayedProgress((prev) => (progress > prev ? progress : prev));
     }, [progress]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setDotCount((prev) => (prev === 3 ? 1 : prev + 1));
+        }, 500);
+        return () => clearInterval(interval);
+    }, []);
 
     useEffect(() => {
         if (displayedProgress >= 99.9 && isSceneReady) {
@@ -21,6 +29,28 @@ const LoaderOverlay = ({ isSceneReady }: LoaderProps) => {
             return () => clearTimeout(timeout);
         }
     }, [displayedProgress, isSceneReady]);
+
+    const animatedDots = Array.from({ length: 3 }, (_, i) => (
+        <motion.span
+            key={i}
+            animate={{
+                y: dotCount === i + 1 ? [0, -10, 0] : 0,
+                opacity: dotCount === i + 1 ? 1 : 0.3,
+            }}
+            transition={{
+                duration: 0.3,
+                ease: "easeOut",
+            }}
+            style={{
+                display: "inline-block",
+                fontSize: "3rem",
+                margin: "0 4px",
+                color: "#fff",
+            }}
+        >
+            .
+        </motion.span>
+    ));
 
     return (
         <AnimatePresence>
@@ -45,8 +75,37 @@ const LoaderOverlay = ({ isSceneReady }: LoaderProps) => {
                         pointerEvents: "none",
                     }}
                 >
-                    <div style={{ color: "#fff", fontSize: "1.5rem" }}>
-                        Caricamento: {Math.round(displayedProgress)}%
+                    <div style={{ textAlign: "center", width: "60%" }}>
+                        <div
+                            style={{
+                                color: "#fff",
+                                fontSize: "3rem",
+                                fontWeight: "bold",
+                                marginBottom: "40px",
+                            }}
+                        >
+                            Loading{animatedDots}
+                        </div>
+                        <div
+                            style={{
+                                width: "100%",
+                                height: "20px",
+                                backgroundColor: "transparent",
+                                border: "2px solid #fff",
+                                padding: "4px",
+                                boxSizing: "border-box",
+                                margin: "0 auto",
+                            }}
+                        >
+                            <div
+                                style={{
+                                    width: `${displayedProgress}%`,
+                                    height: "100%",
+                                    backgroundColor: "#fff",
+                                    transition: "width 0.2s ease-out",
+                                }}
+                            ></div>
+                        </div>
                     </div>
                 </motion.div>
             )}
@@ -54,4 +113,4 @@ const LoaderOverlay = ({ isSceneReady }: LoaderProps) => {
     );
 };
 
-export default LoaderOverlay;
+export default Loader;
