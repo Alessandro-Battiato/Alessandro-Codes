@@ -17,7 +17,7 @@ const CameraController = ({
     return null;
 };
 
-const SceneRenderer = ({ smoothScroll }: SceneRendererProps) => {
+const SceneRenderer = ({ smoothScroll, onSceneReady }: SceneRendererProps) => {
     const sceneOpacity = useTransform(smoothScroll, [0.8, 1], [1, 0]);
 
     const [opacity, setOpacity] = useState(1);
@@ -44,7 +44,10 @@ const SceneRenderer = ({ smoothScroll }: SceneRendererProps) => {
                     height: "100%",
                 }}
             >
-                <Canvas camera={{ position: [0, 0.7, 2.5], fov: 40 }}>
+                <Canvas
+                    onCreated={() => onSceneReady()}
+                    camera={{ position: [0, 0.7, 2.5], fov: 40 }}
+                >
                     <ambientLight />
                     <Background />
                     <CameraController scrollProgress={smoothScroll} />

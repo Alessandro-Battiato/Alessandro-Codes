@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import {
@@ -7,6 +7,7 @@ import {
     useTouchScrollHandler,
     useMouseScrollHandler,
 } from "../../hooks/index";
+import Loader from "../Loader/Loader";
 
 const SceneRenderer = dynamic(() => import("../SceneRenderer/SceneRenderer"), {
     ssr: false,
@@ -17,6 +18,9 @@ const Portfolio = dynamic(() => import("../Portfolio/Portfolio"), {
 });
 
 const MainScene = () => {
+    const [isPortfolioInteractive, setIsPortfolioInteractive] = useState(false);
+    const [isSceneReady, setIsSceneReady] = useState(false);
+
     const containerRef = useRef<HTMLDivElement | null>(null);
 
     const { scrollProgress, smoothScroll, showPortfolio, setShowPortfolio } =
@@ -32,7 +36,9 @@ const MainScene = () => {
         showPortfolio,
     });
 
-    const [isPortfolioInteractive, setIsPortfolioInteractive] = useState(false);
+    const handleSceneReady = useCallback(() => {
+        setIsSceneReady(true);
+    }, []);
 
     useEffect(() => {
         let timeout: NodeJS.Timeout;
@@ -53,12 +59,17 @@ const MainScene = () => {
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             style={{
+                position: "relative",
                 height: "100vh",
                 overflow: showPortfolio ? "auto" : "hidden",
-                position: "relative",
             }}
         >
-            <SceneRenderer smoothScroll={smoothScroll} />
+            <SceneRenderer
+                onSceneReady={handleSceneReady}
+                smoothScroll={smoothScroll}
+            />
+
+            <Loader isSceneReady={isSceneReady} />
 
             <motion.div
                 initial={{ opacity: 0 }}
