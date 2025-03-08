@@ -2,7 +2,7 @@ import React from "react";
 
 const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
     return (
-        <section className="bg-dark-space relative h-screen flex" id="Hero">
+        <section className="relative h-screen flex" id="Hero">
             <div className="flex-1 flex justify-center items-center text-center">
                 <h1
                     className="
