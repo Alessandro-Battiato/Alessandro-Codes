@@ -1,14 +1,29 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useId, useMemo, useState } from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function Navbar() {
     const [isScrolling, setIsScrolling] = useState(false);
+    const [hoveredNavItem, setHoveredNavItem] = useState<number | null>(null);
+
+    const id = useId();
 
     const handleWheel = useCallback(() => {
         setIsScrolling(true);
     }, []);
+
+    const navItems = useMemo(
+        () => [
+            { href: "/", label: "Home" },
+            { href: "/about", label: "About" },
+            { href: "/projects", label: "Projects" },
+            { href: "/blog", label: "Blog" },
+            { href: "/contact", label: "Contact me" },
+        ],
+        []
+    );
 
     useEffect(() => {
         let timeout: NodeJS.Timeout;
@@ -54,37 +69,38 @@ export default function Navbar() {
                         </Link>
                     </div>
 
-                    <div className="flex-[2] flex justify-center items-center gap-8">
-                        <Link
-                            href="/"
-                            className="text-white hover:text-gray-300 font-medium"
+                    <div className="flex-[2] flex justify-center items-center">
+                        <ul
+                            onMouseLeave={() => setHoveredNavItem(null)}
+                            className="flex gap-8"
                         >
-                            Home
-                        </Link>
-                        <Link
-                            href="/about"
-                            className="text-white hover:text-gray-300 font-medium"
-                        >
-                            About
-                        </Link>
-                        <Link
-                            href="/projects"
-                            className="text-white hover:text-gray-300 font-medium"
-                        >
-                            Projects
-                        </Link>
-                        <Link
-                            href="/blog"
-                            className="text-white hover:text-gray-300 font-medium"
-                        >
-                            Blog
-                        </Link>
-                        <Link
-                            href="/contact"
-                            className="text-white hover:text-gray-300 font-medium"
-                        >
-                            Contact me
-                        </Link>
+                            {navItems.map((item, index) => (
+                                <li
+                                    key={item.href}
+                                    className="relative font-medium text-white"
+                                    style={{
+                                        zIndex:
+                                            hoveredNavItem === index ? 1 : 2,
+                                    }}
+                                >
+                                    {hoveredNavItem === index && (
+                                        <motion.div
+                                            layoutId={id}
+                                            className="absolute inset-0 -z-10 bg-[#0D1B2A]"
+                                            initial={{ borderRadius: 8 }}
+                                        />
+                                    )}
+                                    <Link
+                                        onMouseEnter={() =>
+                                            setHoveredNavItem(index)
+                                        }
+                                        href={item.href}
+                                    >
+                                        {item.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </div>
             </div>
