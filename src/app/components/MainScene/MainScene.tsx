@@ -7,6 +7,7 @@ import {
     useTouchScrollHandler,
     useMouseScrollHandler,
 } from "../../hooks/index";
+import { PortfolioProvider } from "@/app/providers/PortfolioContext/PortfolioContext";
 import Loader from "../Loader/Loader";
 
 const SceneRenderer = dynamic(() => import("../SceneRenderer/SceneRenderer"), {
@@ -94,7 +95,9 @@ const MainScene = () => {
                     }
                 }}
             >
-                <Portfolio />
+                <PortfolioProvider showPortfolio={showPortfolio}>
+                    <Portfolio />
+                </PortfolioProvider>
             </motion.div>
         </div>
     );

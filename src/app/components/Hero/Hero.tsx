@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useContext, useRef } from "react";
+
+import { motion, useInView } from "framer-motion";
+
+import { PortfolioContext } from "@/app/providers/PortfolioContext/PortfolioContext";
 
 const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
+    const context = useContext(PortfolioContext);
+    const showPortfolio = context?.showPortfolio ?? false;
+
+    const titleRef = useRef(null);
+    const isInView = useInView(titleRef, { amount: 1.0, once: true }); // parameter "once" prevents jitter
+
     return (
         <section className="relative h-screen flex" id="Hero">
             <div className="flex-1 flex justify-center items-center text-center">
-                <h1
+                <motion.h1
+                    ref={titleRef}
+                    initial={{ opacity: 0, x: -100 }}
+                    animate={
+                        showPortfolio && isInView ? { opacity: 1, x: 0 } : {}
+                    }
+                    transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
                     className="
                         relative
                         w-fit
@@ -34,7 +50,7 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
                     "
                 >
                     Lorem ipsum
-                </h1>
+                </motion.h1>
             </div>
             <div ref={ref} className="flex-1" />
         </section>
