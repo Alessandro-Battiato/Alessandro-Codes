@@ -1,6 +1,7 @@
 import React, { useContext, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { PortfolioContext } from "@/app/providers/PortfolioContext/PortfolioContext";
+import Sparkles from "../Sparkles/Sparkles";
 
 const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
     const context = useContext(PortfolioContext);
@@ -33,7 +34,6 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
                             delay: 0.5,
                             ease: "easeOut",
                         }}
-                        style={{ display: "block" }}
                     >
                         <span className="text-white">I&apos;m </span>
                         <span
@@ -50,25 +50,76 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
                             Alessandro Battiato
                         </span>
                     </motion.span>
-
-                    <motion.span
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={
-                            showPortfolio && isInView
-                                ? { opacity: 1, x: 0 }
-                                : {}
-                        }
-                        transition={{
-                            duration: 1,
-                            delay: 1.5,
-                            ease: "easeOut",
-                        }}
-                        style={{ display: "block" }}
-                        className="mt-4 text-2xl text-gray-200"
-                    >
-                        3D Creative Dev
-                    </motion.span>
                 </motion.h1>
+
+                <motion.h2
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={
+                        showPortfolio && isInView ? { opacity: 1, x: 0 } : {}
+                    }
+                    transition={{
+                        duration: 1,
+                        delay: 1.5,
+                        ease: "easeOut",
+                    }}
+                    className="mt-4 text-2xl text-gray-200"
+                >
+                    3D <Sparkles color="#FFC700">Creative</Sparkles> Dev
+                </motion.h2>
+
+                <motion.div
+                    initial={{ opacity: 0, x: -100 }}
+                    animate={
+                        showPortfolio && isInView ? { opacity: 1, x: 0 } : {}
+                    }
+                    transition={{ duration: 1, delay: 2.5 }}
+                >
+                    <button
+                        className="
+                        group relative inline-flex items-center overflow-hidden rounded-full border-2 
+                        border-electric-blue px-12 py-3 text-lg font-semibold text-electric-blue 
+                        transition-all duration-300 hover:text-white mt-8
+                    "
+                    >
+                        <motion.span
+                            className="
+                            absolute left-0 top-1/2 h-0 w-full bg-electric-blue opacity-100 
+                            transition-all duration-400 ease-in-out group-hover:top-0 group-hover:h-full
+                        "
+                        />
+
+                        <motion.span
+                            className="
+                            absolute right-0 flex h-10 w-10 translate-x-full transform 
+                            items-center justify-start duration-500 ease-in-out group-hover:-translate-x-2
+                        "
+                        >
+                            <svg
+                                className="h-5 w-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                                ></path>
+                            </svg>
+                        </motion.span>
+
+                        <span
+                            className="
+                            relative transform transition-transform duration-700 ease-in-out 
+                            group-hover:-translate-x-3
+                        "
+                        >
+                            Contact Me
+                        </span>
+                    </button>
+                </motion.div>
             </div>
             <div ref={ref} className="flex-1" />
         </section>
