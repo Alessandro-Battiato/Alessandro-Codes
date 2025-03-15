@@ -8,17 +8,15 @@ import {
     useMouseScrollHandler,
 } from "../../hooks/index";
 import { PortfolioProvider } from "@/app/providers/PortfolioContext/PortfolioContext";
+import { MainSceneProps } from "./types";
+
 import Loader from "../Loader/Loader";
 
 const SceneRenderer = dynamic(() => import("../SceneRenderer/SceneRenderer"), {
     ssr: false,
 });
 
-const Portfolio = dynamic(() => import("../Portfolio/Portfolio"), {
-    ssr: false,
-});
-
-const MainScene = () => {
+const MainScene = ({ children }: MainSceneProps) => {
     const [isPortfolioInteractive, setIsPortfolioInteractive] = useState(false);
     const [isSceneReady, setIsSceneReady] = useState(false);
 
@@ -96,7 +94,7 @@ const MainScene = () => {
                 }}
             >
                 <PortfolioProvider showPortfolio={showPortfolio}>
-                    <Portfolio />
+                    {children}
                 </PortfolioProvider>
             </motion.div>
         </div>

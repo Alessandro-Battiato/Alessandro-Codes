@@ -1,5 +1,4 @@
 import "./globals.css";
-import MainScene from "./components/MainScene/MainScene";
 import { Poppins } from "next/font/google";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600", "700"] });
@@ -16,10 +15,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={poppins.className}>
-                <MainScene />
-                {children}
-            </body>
+            <body className={poppins.className}>{children}</body>
         </html>
     );
 }

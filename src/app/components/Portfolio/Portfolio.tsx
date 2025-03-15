@@ -1,3 +1,4 @@
+"use client";
 import React, { useRef } from "react";
 
 import { Canvas } from "@react-three/fiber";
@@ -30,8 +31,6 @@ const Portfolio = () => {
             </Canvas>
 
             <Hero ref={heroRef} />
-
-            <div className="h-48">scroll test</div>
 
             <div className="fixed inset-0 -z-20 w-full h-full">
                 <Image
