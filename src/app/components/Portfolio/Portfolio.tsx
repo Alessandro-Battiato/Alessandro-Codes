@@ -9,6 +9,7 @@ import Image from "next/image";
 import Hero3D from "../Hero3D/Hero3D";
 import Navbar from "../Navbar/Navbar";
 import Hero from "../Hero/Hero";
+import AboutMe from "../AboutMe/AboutMe";
 
 const Portfolio = () => {
     const container = useRef<HTMLDivElement>(null);
@@ -31,6 +32,8 @@ const Portfolio = () => {
             </Canvas>
 
             <Hero ref={heroRef} />
+
+            <AboutMe />
 
             <div className="fixed inset-0 -z-20 w-full h-full">
                 <Image

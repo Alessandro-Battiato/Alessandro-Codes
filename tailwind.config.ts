@@ -11,6 +11,7 @@ export default {
             colors: {
                 "dark-space": "#0A0527",
                 "electric-blue": "#6B6CFF",
+                "electric-pink": "#DB2777",
                 "pastel-violet": "#8B5CF6",
                 "intense-pink": "#FF66B2",
             },
