@@ -1,9 +1,8 @@
-import Image from "next/image";
 import React from "react";
-// TO DO: Hover effect for button (and animated icon as well), and maybe make the text fade in from the left and the image fade in from the right
-// TO DO: HUMANIZE TEXT.
-// TO DO: It's probably impossible to put icons or else, but at least use gradiented sand for the pillars word, and green/blue gradient for the gelatinous cube words
-// TO DO: IMAGE GLSL EFFECT OF WAWA
+import Image from "next/image";
+
+import DownloadButton from "../DownloadButton/DownloadButton";
+
 const AboutMe = () => {
     return (
         <section className="flex p-16 bg-dark-space" id="about">
@@ -46,36 +45,7 @@ const AboutMe = () => {
                         Curious to see what I can build? Check out my resume
                         below!
                     </p>
-                    <a
-                        href="/assets/resume.pdf"
-                        download
-                        className="
-                            flex items-center 
-                            bg-electric-pink hover:bg-pink-700 
-                            text-white
-                            max-w-fit 
-                            px-6 py-3 
-                            mt-8 
-                            rounded-md 
-                            transition
-                        "
-                    >
-                        Download Resume
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            className="w-5 h-5 ml-2"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M4 16a4 4 0 004 4h8a4 4 0 004-4M7 10l5 5m0 0l5-5m-5 5V4"
-                            />
-                        </svg>
-                    </a>
+                    <DownloadButton />
                 </div>
             </div>
             <div className="flex-1 flex items-center justify-center">

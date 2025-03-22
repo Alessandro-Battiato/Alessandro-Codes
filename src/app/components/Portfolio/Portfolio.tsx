@@ -24,7 +24,7 @@ const Portfolio = () => {
 
             <Canvas
                 eventSource={container.current || undefined}
-                className="!fixed"
+                className="!fixed -z-10"
             >
                 <View track={heroRef as React.RefObject<HTMLElement>}>
                     <Hero3D />
