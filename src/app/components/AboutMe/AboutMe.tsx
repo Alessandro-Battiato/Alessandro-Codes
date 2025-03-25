@@ -1,12 +1,19 @@
 import React from "react";
-import Image from "next/image";
+
+import { motion } from "framer-motion";
 
 import DownloadButton from "../DownloadButton/DownloadButton";
 
-const AboutMe = () => {
+const AboutMe = React.forwardRef<HTMLDivElement>(({}, ref) => {
     return (
-        <section className="flex p-16 bg-dark-space" id="about">
-            <div className="flex-1">
+        <section className="flex p-16 bg-dark-space overflow-hidden" id="about">
+            <motion.div
+                className="flex-1"
+                initial={{ x: -200 }}
+                whileInView={{ x: 0 }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+                viewport={{ once: true, amount: 0.2 }}
+            >
                 <div className="max-w-2xl">
                     <h2 className="text-white text-4xl font-semibold mb-6">
                         About me
@@ -47,17 +54,20 @@ const AboutMe = () => {
                     </p>
                     <DownloadButton />
                 </div>
-            </div>
-            <div className="flex-1 flex items-center justify-center">
-                <Image
-                    src="/assets/defaultAboutMe.png"
-                    alt="default about me image"
-                    width={400}
-                    height={400}
-                />
-            </div>
+            </motion.div>
+
+            <motion.div
+                ref={ref}
+                className="flex-1 flex items-center justify-center"
+                initial={{ x: 200 }}
+                whileInView={{ x: 0 }}
+                transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
+                viewport={{ once: true, amount: 0.2 }}
+            />
         </section>
     );
-};
+});
+
+AboutMe.displayName = "AboutMe";
 
 export default AboutMe;
