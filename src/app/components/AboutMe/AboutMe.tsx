@@ -32,7 +32,7 @@ const AboutMe = React.forwardRef<HTMLDivElement>(({}, ref) => {
                         But the real turning point for me was the summer of
                         2023. While on vacation with a friend, we watched{" "}
                         <em>Dungeons &amp; Dragons: Honor Among Thieves</em>.
-                        Seeing the{" "}
+                        The scene with the{" "}
                         <a
                             href="https://www.youtube.com/watch?v=aUS5lJ9_ogk"
                             target="_blank"

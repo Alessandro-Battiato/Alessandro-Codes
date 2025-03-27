@@ -110,14 +110,15 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
                             </svg>
                         </motion.span>
 
-                        <span
+                        <a
+                            href="#contact"
                             className="
                             relative transform transition-transform duration-700 ease-in-out 
                             group-hover:-translate-x-3
                         "
                         >
                             Contact Me
-                        </span>
+                        </a>
                     </button>
                 </motion.div>
             </div>

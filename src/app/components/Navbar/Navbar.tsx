@@ -16,11 +16,11 @@ export default function Navbar() {
 
     const navItems = useMemo(
         () => [
-            { href: "/", label: "Home" },
-            { href: "/about", label: "About" },
-            { href: "/projects", label: "Projects" },
-            { href: "/blog", label: "Blog" },
-            { href: "/contact", label: "Contact me" },
+            { href: "#home", label: "Home" },
+            { href: "#about", label: "About" },
+            { href: "#projects", label: "Projects" },
+            { href: "#blog", label: "Blog" },
+            { href: "#contact", label: "Contact me" },
         ],
         []
     );

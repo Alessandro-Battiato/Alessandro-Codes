@@ -12,6 +12,7 @@ import AboutMe3D from "../AboutMe3D/AboutMe3D";
 import Navbar from "../Navbar/Navbar";
 import Hero from "../Hero/Hero";
 import AboutMe from "../AboutMe/AboutMe";
+import Projects from "../Projects/Projects";
 
 const Portfolio = () => {
     const containerRef = useRef<HTMLDivElement | null>(null);
@@ -49,6 +50,8 @@ const Portfolio = () => {
             <Hero ref={heroRef} />
 
             <AboutMe ref={aboutMeRef} />
+
+            <Projects />
         </main>
     );
 };
