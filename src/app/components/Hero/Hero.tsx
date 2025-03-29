@@ -2,7 +2,7 @@ import React, { useContext, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { PortfolioContext } from "@/app/providers/PortfolioContext/PortfolioContext";
 import Sparkles from "../Sparkles/Sparkles";
-// TO DO: Fix animations bug when re-entering the 2d portfolio, consider using AnimatePresence
+
 const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
     const context = useContext(PortfolioContext);
     const showPortfolio = context?.showPortfolio ?? false;
