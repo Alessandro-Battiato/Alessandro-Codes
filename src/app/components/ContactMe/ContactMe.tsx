@@ -26,7 +26,7 @@ const ContactMe = React.forwardRef(({}, ref) => {
 
     return (
         // temporary height of 1000px for testing purposes
-        <div className="flex p-8 h-[1000px]">
+        <section className="flex p-8 h-[1000px]" id="contact">
             <div
                 ref={formRef}
                 className={`flex-1 flex flex-col justify-center items-center text-center transition-opacity duration-1000 ease-out ${
@@ -98,7 +98,7 @@ const ContactMe = React.forwardRef(({}, ref) => {
                 </form>
             </div>
             <div className="flex-1" ref={ref} />
-        </div>
+        </section>
     );
 });
 

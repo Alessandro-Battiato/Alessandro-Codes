@@ -16,6 +16,7 @@ import AboutMe from "../AboutMe/AboutMe";
 import Projects from "../Projects/Projects";
 import Blog from "../Blog/Blog";
 import ContactMe from "../ContactMe/ContactMe";
+import Footer from "../Footer/Footer";
 
 const Portfolio = () => {
     const containerRef = useRef<HTMLDivElement | null>(null);
@@ -64,6 +65,8 @@ const Portfolio = () => {
             <Blog />
 
             <ContactMe ref={contactMeRef} />
+
+            <Footer />
         </main>
     );
 };
