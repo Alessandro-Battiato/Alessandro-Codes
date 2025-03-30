@@ -1,4 +1,5 @@
 import { ArticleCard } from "@/components/ui/ArticleCard/ArticleCard";
+import { Newspaper } from "lucide-react";
 import React from "react";
 
 const articles = [
@@ -57,8 +58,9 @@ const Blog = () => {
                                 target: "_blank",
                                 rel: "noopener noreferrer",
                             })}
-                            className="inline-block mt-auto rounded-md max-w-fit border border-electric-blue text-electric-blue px-4 py-2 transition duration-300 hover:bg-electric-blue hover:text-white"
+                            className="inline-flex items-center gap-2 mt-auto rounded-md max-w-fit border border-electric-blue text-electric-blue px-4 py-2 transition duration-300 hover:bg-electric-blue hover:text-white"
                         >
+                            <Newspaper size={16} />
                             {article.cta}
                         </a>
                     </ArticleCard>

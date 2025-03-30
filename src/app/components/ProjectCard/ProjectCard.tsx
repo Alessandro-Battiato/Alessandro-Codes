@@ -1,15 +1,15 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-
 import { ProjectCardProps } from "./types";
 import { Lens } from "@/components/ui/Lens/Lens";
+import { ArrowRight } from "lucide-react";
 
 const ProjectCard = ({
     imgUrl,
     title,
     subtitle,
-    href,
+    // href,
     cta,
 }: ProjectCardProps) => {
     return (
@@ -35,19 +35,7 @@ const ProjectCard = ({
                 className="relative group uppercase font-semibold text-gray-300 hover:text-white transition-colors duration-300 flex items-center"
             >
                 {cta}
-                <span className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                    >
-                        <path d="M9 18l6-6-6-6" />
-                    </svg>
-                </span>
+                <ArrowRight className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" />
                 <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
             </Link>
         </div>
