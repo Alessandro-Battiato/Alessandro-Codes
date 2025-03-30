@@ -53,7 +53,6 @@ const config = {
                     foreground: "hsl(var(--card-foreground))",
                 },
 
-                // --- Le tue vecchie custom colors ---
                 "dark-space": "#0A0527",
                 "electric-blue": "#6B6CFF",
                 "electric-pink": "#DB2777",
