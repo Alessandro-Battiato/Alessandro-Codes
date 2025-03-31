@@ -10,6 +10,14 @@ declare global {
                     THREE.ShaderMaterial,
                     HoverShiftMaterialProps
                 >;
+                earthMaterial: ReactThreeFiber.MaterialNode<
+                    THREE.ShaderMaterial,
+                    {}
+                >;
+                atmosphereMaterial: ReactThreeFiber.MaterialNode<
+                    THREE.ShaderMaterial,
+                    {}
+                >;
             }
         }
     }
