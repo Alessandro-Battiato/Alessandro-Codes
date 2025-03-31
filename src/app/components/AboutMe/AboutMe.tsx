@@ -9,8 +9,8 @@ const AboutMe = React.forwardRef<HTMLDivElement>(({}, ref) => {
         <section className="flex p-16 bg-dark-space overflow-hidden" id="about">
             <motion.div
                 className="flex-1"
-                initial={{ x: -200 }}
-                whileInView={{ x: 0 }}
+                initial={{ opacity: 0, x: -200 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1.2, ease: "easeOut" }}
                 viewport={{ once: true, amount: 0.2 }}
             >
@@ -56,13 +56,9 @@ const AboutMe = React.forwardRef<HTMLDivElement>(({}, ref) => {
                 </div>
             </motion.div>
 
-            <motion.div
+            <div
                 ref={ref}
                 className="flex-1 flex items-center justify-center"
-                initial={{ x: 200 }}
-                whileInView={{ x: 0 }}
-                transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
-                viewport={{ once: true, amount: 0.2 }}
             />
         </section>
     );
