@@ -21,6 +21,7 @@ const MainScene = ({ children }: MainSceneProps) => {
     const [isSceneReady, setIsSceneReady] = useState(false);
 
     const containerRef = useRef<HTMLDivElement | null>(null);
+    const resistanceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
     const { scrollProgress, smoothScroll, showPortfolio, setShowPortfolio } =
         useScrollProgress();
@@ -50,6 +51,27 @@ const MainScene = ({ children }: MainSceneProps) => {
 
         return () => clearTimeout(timeout);
     }, [showPortfolio]);
+
+    const handlePortfolioWheel = useCallback(
+        (e: React.WheelEvent<HTMLDivElement>) => {
+            const target = e.currentTarget;
+
+            if (target.scrollTop <= 0 && e.deltaY < 0) {
+                if (!resistanceTimerRef.current) {
+                    resistanceTimerRef.current = setTimeout(() => {
+                        setShowPortfolio(false);
+                        resistanceTimerRef.current = null;
+                    }, 100);
+                }
+            } else {
+                if (resistanceTimerRef.current) {
+                    clearTimeout(resistanceTimerRef.current);
+                    resistanceTimerRef.current = null;
+                }
+            }
+        },
+        [setShowPortfolio]
+    );
 
     return (
         <div
@@ -86,12 +108,7 @@ const MainScene = ({ children }: MainSceneProps) => {
                     pointerEvents: isPortfolioInteractive ? "auto" : "none",
                     overscrollBehavior: "contain",
                 }}
-                onScroll={(e) => {
-                    const target = e.target as HTMLDivElement;
-                    if (target.scrollTop <= 0) {
-                        setShowPortfolio(false);
-                    }
-                }}
+                onWheel={handlePortfolioWheel}
             >
                 <PortfolioProvider showPortfolio={showPortfolio}>
                     {children}

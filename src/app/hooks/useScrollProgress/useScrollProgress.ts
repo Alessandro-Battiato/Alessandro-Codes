@@ -16,12 +16,6 @@ export const useScrollProgress = () => {
             if (latest > previous) {
                 if (latest >= 0.98) {
                     setShowPortfolio(true);
-                } else {
-                    setShowPortfolio(false);
-                }
-            } else {
-                if (latest < 0.98) {
-                    setShowPortfolio(false);
                 }
             }
             lastValue.current = latest;
