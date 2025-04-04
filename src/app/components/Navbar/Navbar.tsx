@@ -84,7 +84,7 @@ export default function Navbar() {
                                     {hoveredNavItem === index && (
                                         <motion.div
                                             layoutId={id}
-                                            className="absolute inset-0 -z-10 bg-gradient-to-r from-dark-space"
+                                            className="absolute inset-0 -z-10 bg-[#1E2A47]"
                                             initial={{ borderRadius: 8 }}
                                         />
                                     )}
