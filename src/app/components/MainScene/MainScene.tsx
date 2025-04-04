@@ -23,6 +23,8 @@ const MainScene = ({ children }: MainSceneProps) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const resistanceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
+    const portfolioTouchStartRef = useRef<number | null>(null);
+
     const { scrollProgress, smoothScroll, showPortfolio, setShowPortfolio } =
         useScrollProgress();
 
@@ -57,6 +59,36 @@ const MainScene = ({ children }: MainSceneProps) => {
             const target = e.currentTarget;
 
             if (target.scrollTop <= 0 && e.deltaY < 0) {
+                if (!resistanceTimerRef.current) {
+                    resistanceTimerRef.current = setTimeout(() => {
+                        setShowPortfolio(false);
+                        resistanceTimerRef.current = null;
+                    }, 100);
+                }
+            } else {
+                if (resistanceTimerRef.current) {
+                    clearTimeout(resistanceTimerRef.current);
+                    resistanceTimerRef.current = null;
+                }
+            }
+        },
+        [setShowPortfolio]
+    );
+
+    const handlePortfolioTouchStart = useCallback(
+        (e: React.TouchEvent<HTMLDivElement>) => {
+            portfolioTouchStartRef.current = e.touches[0].clientY;
+        },
+        []
+    );
+
+    const handlePortfolioTouchMove = useCallback(
+        (e: React.TouchEvent<HTMLDivElement>) => {
+            if (portfolioTouchStartRef.current === null) return;
+            const currentY = e.touches[0].clientY;
+            const diff = currentY - portfolioTouchStartRef.current;
+
+            if (e.currentTarget.scrollTop <= 0 && diff > 10) {
                 if (!resistanceTimerRef.current) {
                     resistanceTimerRef.current = setTimeout(() => {
                         setShowPortfolio(false);
@@ -109,6 +141,8 @@ const MainScene = ({ children }: MainSceneProps) => {
                     overscrollBehavior: "contain",
                 }}
                 onWheel={handlePortfolioWheel}
+                onTouchStart={handlePortfolioTouchStart}
+                onTouchMove={handlePortfolioTouchMove}
             >
                 <PortfolioProvider showPortfolio={showPortfolio}>
                     {children}
