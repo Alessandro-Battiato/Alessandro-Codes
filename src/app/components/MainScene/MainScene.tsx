@@ -9,7 +9,6 @@ import {
 } from "../../hooks/index";
 import { PortfolioProvider } from "@/app/providers/PortfolioContext/PortfolioContext";
 import { MainSceneProps } from "./types";
-
 import Loader from "../Loader/Loader";
 
 const SceneRenderer = dynamic(() => import("../SceneRenderer/SceneRenderer"), {
@@ -105,10 +104,41 @@ const MainScene = ({ children }: MainSceneProps) => {
         [setShowPortfolio]
     );
 
+    // a11y
+    const handleSceneKeyDown = useCallback(
+        (e: React.KeyboardEvent<HTMLDivElement>) => {
+            if (!showPortfolio) {
+                if (
+                    e.key === "ArrowDown" ||
+                    e.key === "PageDown" ||
+                    e.key === " "
+                ) {
+                    e.preventDefault();
+                    setShowPortfolio(true);
+                }
+            }
+        },
+        [setShowPortfolio, showPortfolio]
+    );
+
+    const handlePortfolioKeyDown = useCallback(
+        (e: React.KeyboardEvent<HTMLDivElement>) => {
+            if (e.key === "ArrowUp" || e.key === "Escape") {
+                const target = e.currentTarget;
+                if (target.scrollTop <= 0 || e.key === "Escape") {
+                    setShowPortfolio(false);
+                }
+            }
+        },
+        [setShowPortfolio]
+    );
+
     return (
         <div
             ref={containerRef}
+            tabIndex={-1}
             onWheel={handleContainerWheel}
+            onKeyDown={handleSceneKeyDown}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             style={{
@@ -121,7 +151,6 @@ const MainScene = ({ children }: MainSceneProps) => {
                 onSceneReady={handleSceneReady}
                 smoothScroll={smoothScroll}
             />
-
             <Loader isSceneReady={isSceneReady} />
 
             <motion.div
@@ -143,6 +172,11 @@ const MainScene = ({ children }: MainSceneProps) => {
                 onWheel={handlePortfolioWheel}
                 onTouchStart={handlePortfolioTouchStart}
                 onTouchMove={handlePortfolioTouchMove}
+                onKeyDown={handlePortfolioKeyDown}
+                tabIndex={0}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Portfolio Overlay"
             >
                 <PortfolioProvider showPortfolio={showPortfolio}>
                     {children}
