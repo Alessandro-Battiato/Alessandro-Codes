@@ -49,7 +49,7 @@ export default function Navbar() {
 
     return (
         <nav className="fixed top-0 left-0 w-full z-30">
-            <div className="relative h-24">
+            <div className="relative h-16 md:h-24">
                 <div className="absolute inset-0 bg-gradient-to-b from-black/75 to-transparent" />
                 <div
                     className={`absolute inset-0 bg-gradient-to-b from-black/75 to-black/25 transition-opacity duration-500 ${
@@ -62,8 +62,9 @@ export default function Navbar() {
                             <Image
                                 src="/assets/logo.png"
                                 alt="Logo"
-                                width={100}
-                                height={100}
+                                width={75}
+                                height={75}
+                                className="md:w-[100px] md:h-[100px]"
                             />
                         </Link>
                     </div>

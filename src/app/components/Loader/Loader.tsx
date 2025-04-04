@@ -75,35 +75,14 @@ const Loader: React.FC<LoaderProps> = ({ isSceneReady }) => {
                         pointerEvents: "none",
                     }}
                 >
-                    <div style={{ textAlign: "center", width: "60%" }}>
-                        <div
-                            style={{
-                                color: "#fff",
-                                fontSize: "3rem",
-                                fontWeight: "bold",
-                                marginBottom: "40px",
-                            }}
-                        >
+                    <div className="text-center w-3/5">
+                        <p className="text-white font-bold mb-10 text-4xl md:text-5xl">
                             Loading{animatedDots}
-                        </div>
-                        <div
-                            style={{
-                                width: "100%",
-                                height: "20px",
-                                backgroundColor: "transparent",
-                                border: "2px solid #fff",
-                                padding: "4px",
-                                boxSizing: "border-box",
-                                margin: "0 auto",
-                            }}
-                        >
+                        </p>
+                        <div className="w-full h-5 bg-transparent border-2 border-white p-1 box-border mx-auto">
                             <div
-                                style={{
-                                    width: `${displayedProgress}%`,
-                                    height: "100%",
-                                    backgroundColor: "#fff",
-                                    transition: "width 0.2s ease-out",
-                                }}
+                                className="h-full bg-white transition-all duration-200 ease-out"
+                                style={{ width: `${displayedProgress}%` }}
                             ></div>
                         </div>
                     </div>
