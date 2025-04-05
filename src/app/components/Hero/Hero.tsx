@@ -8,7 +8,7 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
     const showPortfolio = context?.showPortfolio ?? false;
 
     const titleRef = useRef(null);
-    const isInView = useInView(titleRef, { amount: 1.0, once: true }); // parameter "once" prevents jitter
+    const isInView = useInView(titleRef, { amount: 0.5, once: true }); // parameter "once" prevents jitter
 
     return (
         <section
