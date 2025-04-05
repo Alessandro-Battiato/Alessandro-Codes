@@ -81,7 +81,7 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
                         href="#contact"
                         className="
                             group relative inline-flex items-center overflow-hidden rounded-full border-2 
-                            border-electric-blue py-1 px-6 lg:px-12 lg:py-3 text-lg font-semibold text-electric-blue 
+                            border-electric-blue py-1 px-6 lg:px-12 lg:py-3 text-base lg:text-lg font-semibold text-electric-blue 
                             transition-all duration-300 hover:text-white mt-8
                         "
                     >
@@ -93,7 +93,7 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
                         />
                         <span
                             className="
-                                absolute right-0 flex h-10 w-10 translate-x-full transform 
+                                absolute right-0 flex h-5 w-5 lg:h-10 lg:w-10 translate-x-full transform 
                                 items-center justify-start duration-500 ease-in-out group-hover:-translate-x-2
                             "
                         >
