@@ -27,18 +27,18 @@ const projects = [
 
 const Projects = () => {
     return (
-        <section className="flex flex-col p-16" id="projects">
-            <header className="mb-20">
-                <h2 className="mb-6 text-white text-4xl font-semibold">
+        <section className="flex flex-col p-4 lg:p-16" id="projects">
+            <header className="mb-10 lg:mb-20">
+                <h2 className="mb-6 text-white text-2xl lg:text-4xl font-semibold">
                     Recent projects
                 </h2>
-                <p className="text-gray-200 text-base leading-relaxed">
+                <p className="text-gray-200 text-sm lg:text-base leading-relaxed">
                     I enjoy keeping myself occupied, which is why I&apos;m
                     always working on something. <br />
                     Feel free to explore some of my best projects!
                 </p>
             </header>
-            <div className="flex gap-6 items-center justify-center">
+            <div className="flex flex-wrap gap-6 items-center justify-center">
                 {projects.map((project, idx) => (
                     <ProjectCard key={idx} {...project} />
                 ))}

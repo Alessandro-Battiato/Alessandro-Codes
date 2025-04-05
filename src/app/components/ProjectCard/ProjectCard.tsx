@@ -23,16 +23,16 @@ const ProjectCard = ({
                     height={300}
                 />
             </Lens>
-            <h3 className="mt-6 mb-2 text-gray-100 text-2xl font-bold leading-relaxed">
+            <h3 className="mt-6 mb-2 text-gray-100 text-xl lg:text-2xl font-bold leading-relaxed">
                 {title}
             </h3>
-            <p className="mb-3 text-gray-300 text-base leading-relaxed">
+            <p className="mb-3 text-gray-300 text-sm lg:text-base leading-relaxed">
                 {subtitle}
             </p>
             <Link
                 // href={href} USE ONCE PROJECTS CASE STUDY PAGES ARE READY
                 href="#"
-                className="relative group uppercase font-semibold text-gray-300 hover:text-white transition-colors duration-300 flex items-center"
+                className="relative text-sm lg:text-base group uppercase font-semibold text-gray-300 hover:text-white transition-colors duration-300 flex items-center"
             >
                 {cta}
                 <ArrowRight className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" />
