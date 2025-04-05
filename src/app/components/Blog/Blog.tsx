@@ -26,12 +26,15 @@ const articles = [
 
 const Blog = () => {
     return (
-        <section className="flex flex-col p-16 bg-dark-space" id="blog">
+        <section
+            className="flex flex-col px-4 py-8 lg:p-16 bg-dark-space"
+            id="blog"
+        >
             <header className="mb-20">
-                <h2 className="mb-6 text-white text-4xl font-semibold">
+                <h2 className="mb-6 text-white text-2xl lg:text-4xl font-semibold">
                     CodingHue
                 </h2>
-                <p className="text-gray-200 text-base leading-relaxed">
+                <p className="text-gray-200 text-sm lg:text-base leading-relaxed">
                     This is my little corner in which I share my knowledge and
                     tutorials about everything I practice with. <br />
                     From cute 2D/3D animations, to technical tips regarding the
@@ -42,7 +45,7 @@ const Blog = () => {
                 {articles.map((article, idx) => (
                     <ArticleCard
                         key={idx}
-                        className="flex flex-col justify-between rounded-[22px] max-w-sm p-4 sm:p-10 min-w-[384px] min-h-[350px] bg-zinc-900"
+                        className="flex flex-col justify-between rounded-[22px] max-w-sm p-4 sm:p-10 min-w-[334px] lg:min-w-[384px] min-h-[350px] bg-zinc-900"
                     >
                         <h3 className="text-base sm:text-xl mt-2 mb-2 text-white">
                             {article.title}
@@ -58,7 +61,7 @@ const Blog = () => {
                                 target: "_blank",
                                 rel: "noopener noreferrer",
                             })}
-                            className="inline-flex items-center gap-2 mt-auto rounded-md max-w-fit border border-electric-blue text-electric-blue px-4 py-2 transition duration-300 hover:bg-electric-blue hover:text-white"
+                            className="inline-flex items-center gap-2 mt-auto rounded-md max-w-fit border border-electric-blue text-electric-blue text-sm lg:text-base px-2 py-1 lg:px-4 lg:py-2 transition duration-300 hover:bg-electric-blue hover:text-white"
                         >
                             <Newspaper size={16} />
                             {article.cta}

@@ -27,7 +27,7 @@ const projects = [
 
 const Projects = () => {
     return (
-        <section className="flex flex-col p-4 lg:p-16" id="projects">
+        <section className="flex flex-col px-4 py-8 lg:p-16" id="projects">
             <header className="mb-10 lg:mb-20">
                 <h2 className="mb-6 text-white text-2xl lg:text-4xl font-semibold">
                     Recent projects
