@@ -20,6 +20,7 @@ const MainScene = ({ children }: MainSceneProps) => {
     const [isSceneReady, setIsSceneReady] = useState(false);
 
     const containerRef = useRef<HTMLDivElement | null>(null);
+    const portfolioOverlayRef = useRef<HTMLDivElement | null>(null);
     const resistanceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
     const portfolioTouchStartRef = useRef<number | null>(null);
@@ -51,6 +52,12 @@ const MainScene = ({ children }: MainSceneProps) => {
         }
 
         return () => clearTimeout(timeout);
+    }, [showPortfolio]);
+
+    useEffect(() => {
+        if (showPortfolio && portfolioOverlayRef.current) {
+            portfolioOverlayRef.current.focus();
+        }
     }, [showPortfolio]);
 
     const handlePortfolioWheel = useCallback(
@@ -154,6 +161,7 @@ const MainScene = ({ children }: MainSceneProps) => {
             <Loader isSceneReady={isSceneReady} />
 
             <motion.div
+                ref={portfolioOverlayRef}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: showPortfolio ? 1 : 0 }}
                 exit={{ opacity: 0 }}
