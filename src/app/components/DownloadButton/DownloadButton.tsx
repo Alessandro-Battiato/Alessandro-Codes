@@ -64,8 +64,9 @@ const DownloadButton: React.FC = () => {
                 border border-electric-pink rounded-md
                 bg-electric-pink 
                 text-white 
-                max-w-fit 
-                px-6 py-3 
+                max-w-fit
+                px-3 py-2
+                lg:px-6 lg:py-3 
                 mt-8   
                 transition-all duration-500
                 hover:bg-transparent 

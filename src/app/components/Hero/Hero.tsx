@@ -12,7 +12,7 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
 
     return (
         <section
-            className="relative h-screen flex flex-col lg:flex-row items-center"
+            className="relative p-4 h-screen flex flex-col lg:flex-row items-center"
             id="Hero"
         >
             <div className="flex-1 w-full h-full flex flex-col justify-center items-center text-center">
