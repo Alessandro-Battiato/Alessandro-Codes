@@ -11,8 +11,11 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
     const isInView = useInView(titleRef, { amount: 1.0, once: true }); // parameter "once" prevents jitter
 
     return (
-        <section className="relative h-screen flex items-center" id="Hero">
-            <div className="flex-1 flex flex-col justify-center items-center text-center">
+        <section
+            className="relative h-screen flex flex-col lg:flex-row items-center"
+            id="Hero"
+        >
+            <div className="flex-1 w-full h-full flex flex-col justify-center items-center text-center">
                 <motion.h1
                     ref={titleRef}
                     initial={{ opacity: 0, x: -100 }}
@@ -20,7 +23,7 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
                         showPortfolio && isInView ? { opacity: 1, x: 0 } : {}
                     }
                     transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-                    className="relative w-fit text-5xl font-bold"
+                    className="relative w-fit text-3xl lg:text-5xl font-bold"
                 >
                     <motion.span
                         initial={{ opacity: 0, x: -50 }}
@@ -62,7 +65,7 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
                         delay: 1.5,
                         ease: "easeOut",
                     }}
-                    className="mt-4 text-2xl text-gray-200"
+                    className="mt-4 text-xl lg:text-2xl text-gray-200"
                 >
                     3D <Sparkles color="#FFC700">Creative</Sparkles> Dev
                 </motion.h2>
@@ -78,7 +81,7 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
                         href="#contact"
                         className="
                             group relative inline-flex items-center overflow-hidden rounded-full border-2 
-                            border-electric-blue px-12 py-3 text-lg font-semibold text-electric-blue 
+                            border-electric-blue py-1 px-6 lg:px-12 lg:py-3 text-lg font-semibold text-electric-blue 
                             transition-all duration-300 hover:text-white mt-8
                         "
                     >
@@ -116,7 +119,10 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
                     </a>
                 </motion.div>
             </div>
-            <div ref={ref} className="flex-1 h-full max-h-[800px]" />
+            <div
+                ref={ref}
+                className="hidden lg:flex flex-1 h-full max-h-[800px]"
+            />
         </section>
     );
 });

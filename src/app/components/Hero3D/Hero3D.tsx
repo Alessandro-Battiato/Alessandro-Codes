@@ -20,7 +20,7 @@ export default function Hero3D() {
         Object.values(actions).forEach((action) => action?.play());
     }, [actions]);
 
-    if (width < 768) return null;
+    if (width < 992) return null;
 
     return (
         <>
