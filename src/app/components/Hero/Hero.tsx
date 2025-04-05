@@ -11,7 +11,7 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
     const isInView = useInView(titleRef, { amount: 1.0, once: true }); // parameter "once" prevents jitter
 
     return (
-        <section className="relative h-screen flex" id="Hero">
+        <section className="relative h-screen flex items-center" id="Hero">
             <div className="flex-1 flex flex-col justify-center items-center text-center">
                 <motion.h1
                     ref={titleRef}
@@ -116,7 +116,7 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
                     </a>
                 </motion.div>
             </div>
-            <div ref={ref} className="flex-1" />
+            <div ref={ref} className="flex-1 h-full max-h-[800px]" />
         </section>
     );
 });

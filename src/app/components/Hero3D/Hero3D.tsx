@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Float, PerspectiveCamera, useAnimations } from "@react-three/drei";
-import { useGLTFModels } from "@/app/hooks";
+import { useGLTFModels, useWindowSize } from "@/app/hooks";
 
 export default function Hero3D() {
     const {
@@ -13,10 +13,14 @@ export default function Hero3D() {
 
     const { actions } = useAnimations(animations, astronaut);
 
+    const { width } = useWindowSize();
+
     useEffect(() => {
         if (!actions) return;
         Object.values(actions).forEach((action) => action?.play());
     }, [actions]);
+
+    if (width < 768) return null;
 
     return (
         <>
@@ -27,6 +31,7 @@ export default function Hero3D() {
                     object={astronaut}
                     position={[-2, -4, -5]}
                     rotation={[0, Math.PI * 1.3, 0]}
+                    scale={[1, 1, 1]}
                 />
             </Float>
         </>
