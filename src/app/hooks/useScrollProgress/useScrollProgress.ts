@@ -13,8 +13,12 @@ export const useScrollProgress = () => {
     useEffect(() => {
         const unsubscribe = smoothScroll.on("change", (latest) => {
             const previous = lastValue.current;
+            const threshold =
+                typeof window !== "undefined" && window.innerWidth < 768
+                    ? 0.5
+                    : 0.98;
             if (latest > previous) {
-                if (latest >= 0.98) {
+                if (latest >= threshold) {
                     setShowPortfolio(true);
                 }
             }
