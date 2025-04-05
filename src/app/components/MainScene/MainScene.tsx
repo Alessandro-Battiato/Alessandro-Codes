@@ -60,6 +60,17 @@ const MainScene = ({ children }: MainSceneProps) => {
         }
     }, [showPortfolio]);
 
+    useEffect(() => {
+        if (!showPortfolio) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
+        return () => {
+            document.body.style.overflow = "auto";
+        };
+    }, [showPortfolio]);
+
     const handlePortfolioWheel = useCallback(
         (e: React.WheelEvent<HTMLDivElement>) => {
             const target = e.currentTarget;
