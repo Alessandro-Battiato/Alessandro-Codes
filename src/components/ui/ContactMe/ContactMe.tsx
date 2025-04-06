@@ -70,6 +70,7 @@ const ContactMe = React.forwardRef<HTMLDivElement>(({}, ref) => {
                                         name="fullName"
                                         required
                                         placeholder="Your name"
+                                        disabled={state.submitting}
                                         className="w-full p-3 text-sm lg:text-lg bg-[#2A2063] text-white border border-electric-pink rounded-xl focus:ring-electric-pink focus:outline-none"
                                     />
                                 </div>
@@ -86,6 +87,7 @@ const ContactMe = React.forwardRef<HTMLDivElement>(({}, ref) => {
                                         name="email"
                                         required
                                         placeholder="Your email address"
+                                        disabled={state.submitting}
                                         className="w-full p-3 text-sm lg:text-lg bg-[#2A2063] text-white border border-electric-pink rounded-xl focus:ring-electric-pink focus:outline-none"
                                     />
                                     <div style={{ color: "#E63946" }}>
@@ -109,6 +111,7 @@ const ContactMe = React.forwardRef<HTMLDivElement>(({}, ref) => {
                                         required
                                         rows={5}
                                         placeholder="Your message"
+                                        disabled={state.submitting}
                                         className="w-full p-3 text-sm lg:text-lg bg-[#2A2063] text-white border border-electric-pink rounded-xl focus:ring-electric-pink focus:outline-none"
                                     />
                                     <div style={{ color: "#E63946" }}>
