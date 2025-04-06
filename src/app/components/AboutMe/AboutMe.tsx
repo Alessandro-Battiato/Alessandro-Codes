@@ -14,6 +14,7 @@ const AboutMe = React.forwardRef<HTMLDivElement>(({}, ref) => {
             id="about"
         >
             <div
+                role="img"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
                 onTouchStart={() => setIsHovered(true)}
@@ -24,9 +25,11 @@ const AboutMe = React.forwardRef<HTMLDivElement>(({}, ref) => {
                     src="/assets/defaultAboutMe.png"
                     alt="Default"
                     fill
+                    sizes="(max-width: 1024px) 280px, 320px"
                     className="object-contain"
                 />
                 <motion.div
+                    className="absolute inset-0"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: isHovered ? 1 : 0 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
@@ -35,6 +38,7 @@ const AboutMe = React.forwardRef<HTMLDivElement>(({}, ref) => {
                         src="/assets/hoveredAboutMe.png"
                         alt="Hovered"
                         fill
+                        sizes="(max-width: 1024px) 280px, 320px"
                         className="object-contain"
                     />
                 </motion.div>
