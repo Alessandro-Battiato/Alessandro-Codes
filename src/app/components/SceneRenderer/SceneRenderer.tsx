@@ -21,6 +21,12 @@ const SceneRenderer = ({ smoothScroll, onSceneReady }: SceneRendererProps) => {
     const sceneOpacity = useTransform(smoothScroll, [0.8, 1], [1, 0]);
     const [opacity, setOpacity] = useState(1);
     const [scaleFactor, setScaleFactor] = useState(1);
+    const [isSceneReady, setIsSceneReady] = useState(false);
+
+    const onCreated = useCallback(() => {
+        setIsSceneReady(true);
+        onSceneReady();
+    }, [onSceneReady]);
 
     const { width } = useWindowSize();
 
@@ -61,7 +67,7 @@ const SceneRenderer = ({ smoothScroll, onSceneReady }: SceneRendererProps) => {
                 }}
             >
                 <Canvas
-                    onCreated={() => onSceneReady()}
+                    onCreated={onCreated}
                     camera={{ position: [0, 0.7, 2.5], fov: 40 }}
                 >
                     <ambientLight />
@@ -105,7 +111,7 @@ const SceneRenderer = ({ smoothScroll, onSceneReady }: SceneRendererProps) => {
                     </Html>
                 </Canvas>
             </motion.div>
-            <ScrollHint />
+            <ScrollHint isSceneReady={isSceneReady} />
         </>
     );
 };

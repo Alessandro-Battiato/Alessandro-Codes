@@ -1,15 +1,29 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { ScrollHintProps } from "./types";
 
-const ScrollHint = () => {
-    const [show, setShow] = useState(true);
+const ScrollHint = ({ isSceneReady }: ScrollHintProps) => {
+    const [show, setShow] = useState(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setShow(false);
-        }, 2500);
-        return () => clearTimeout(timer);
-    }, []);
+        if (isSceneReady) {
+            const timer = setTimeout(() => {
+                setShow(true);
+            }, 500);
+
+            return () => clearTimeout(timer);
+        }
+        return () => {};
+    }, [isSceneReady]);
+
+    useEffect(() => {
+        if (show) {
+            const hideTimer = setTimeout(() => {
+                setShow(false);
+            }, 3000);
+            return () => clearTimeout(hideTimer);
+        }
+    }, [show]);
 
     return (
         <AnimatePresence>
@@ -18,10 +32,10 @@ const ScrollHint = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 1, delay: 2 }}
+                    transition={{ duration: 1, delay: 0 }}
                     style={{
                         position: "absolute",
-                        bottom: "20px",
+                        bottom: "50px",
                         left: "50%",
                         transform: "translateX(-50%)",
                         pointerEvents: "none",
