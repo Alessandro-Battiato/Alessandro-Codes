@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ArticleCardProps } from "./types";
 
-export const ArticleCard = ({
+const ArticleCard = ({
     children,
     className,
     containerClassName,
@@ -66,3 +66,5 @@ export const ArticleCard = ({
         </div>
     );
 };
+
+export default ArticleCard;

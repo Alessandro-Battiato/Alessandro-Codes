@@ -1,6 +1,6 @@
 import React from "react";
 
-import MainScene from "@/app/components/MainScene/MainScene";
+import { MainScene } from "@/components/ui";
 
 export default function PortfolioLayout({
     children,

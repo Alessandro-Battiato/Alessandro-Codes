@@ -4,7 +4,7 @@ import React, { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { LensProps } from "./types";
 
-export const Lens: React.FC<LensProps> = ({
+const Lens: React.FC<LensProps> = ({
     children,
     zoomFactor = 1.5,
     lensSize = 170,
@@ -116,3 +116,5 @@ export const Lens: React.FC<LensProps> = ({
         </div>
     );
 };
+
+export default Lens;
