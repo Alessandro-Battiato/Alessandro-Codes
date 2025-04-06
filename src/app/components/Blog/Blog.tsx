@@ -45,7 +45,7 @@ const Blog = () => {
                 {articles.map((article, idx) => (
                     <ArticleCard
                         key={idx}
-                        className="flex flex-col justify-between rounded-[22px] max-w-sm p-4 sm:p-10 min-w-[334px] lg:min-w-[384px] min-h-[350px] bg-zinc-900"
+                        className="flex flex-col justify-between rounded-[22px] max-w-sm p-4 sm:p-10 w-[318px] md:w-[384px] min-h-[350px] bg-zinc-900"
                     >
                         <h3 className="text-base sm:text-xl mt-2 mb-2 text-white">
                             {article.title}

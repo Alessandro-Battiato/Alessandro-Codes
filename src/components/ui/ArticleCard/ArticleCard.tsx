@@ -18,7 +18,7 @@ export const ArticleCard = ({
         },
     };
     return (
-        <div className={cn("relative p-[4px] group", containerClassName)}>
+        <div className={cn("relative p-1 group", containerClassName)}>
             <motion.div
                 variants={animate ? variants : undefined}
                 initial={animate ? "initial" : undefined}
