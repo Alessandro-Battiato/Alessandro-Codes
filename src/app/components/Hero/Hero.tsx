@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { PortfolioContext } from "@/app/providers/PortfolioContext/PortfolioContext";
 import Sparkles from "../Sparkles/Sparkles";
@@ -7,9 +7,20 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
     const context = useContext(PortfolioContext);
     const shouldReduceMotion = useReducedMotion();
     const showPortfolio = context?.showPortfolio ?? false;
-
     const titleRef = useRef(null);
     const isInView = useInView(titleRef, { amount: 0.5, once: true });
+
+    const [animationPlayed, setAnimationPlayed] = useState(false);
+
+    useEffect(() => {
+        if (showPortfolio && isInView && !animationPlayed) {
+            setAnimationPlayed(true);
+        }
+    }, [showPortfolio, isInView, animationPlayed]);
+
+    const initialH1 =
+        animationPlayed || shouldReduceMotion ? {} : { opacity: 0, x: -100 };
+    const animateH1 = { opacity: 1, x: 0 };
 
     return (
         <section
@@ -19,12 +30,8 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
             <div className="flex-1 w-full h-full flex flex-col justify-center items-center text-center">
                 <motion.h1
                     ref={titleRef}
-                    initial={
-                        shouldReduceMotion ? false : { opacity: 0, x: -100 }
-                    }
-                    animate={
-                        showPortfolio && isInView ? { opacity: 1, x: 0 } : {}
-                    }
+                    initial={initialH1}
+                    animate={showPortfolio && isInView ? animateH1 : {}}
                     transition={
                         shouldReduceMotion
                             ? { duration: 0 }
@@ -34,7 +41,9 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
                 >
                     <motion.span
                         initial={
-                            shouldReduceMotion ? false : { opacity: 0, x: -50 }
+                            shouldReduceMotion || animationPlayed
+                                ? {}
+                                : { opacity: 0, x: -50 }
                         }
                         animate={
                             showPortfolio && isInView
@@ -44,11 +53,7 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
                         transition={
                             shouldReduceMotion
                                 ? { duration: 0 }
-                                : {
-                                      duration: 1,
-                                      delay: 0.5,
-                                      ease: "easeOut",
-                                  }
+                                : { duration: 1, delay: 0.5, ease: "easeOut" }
                         }
                     >
                         <span className="text-white">I&apos;m </span>
@@ -70,7 +75,9 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
 
                 <motion.h2
                     initial={
-                        shouldReduceMotion ? false : { opacity: 0, x: -50 }
+                        shouldReduceMotion || animationPlayed
+                            ? {}
+                            : { opacity: 0, x: -50 }
                     }
                     animate={
                         showPortfolio && isInView ? { opacity: 1, x: 0 } : {}
@@ -78,20 +85,18 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
                     transition={
                         shouldReduceMotion
                             ? { duration: 0 }
-                            : {
-                                  duration: 1,
-                                  delay: 1.5,
-                                  ease: "easeOut",
-                              }
+                            : { duration: 1, delay: 1.5, ease: "easeOut" }
                     }
-                    className="mt-4 text-xl lg:text-2xl text-gray-200"
+                    className="mt-2 lg:mt-4 text-xl lg:text-2xl text-gray-200"
                 >
                     3D <Sparkles color="#FFC700">Creative</Sparkles> Dev
                 </motion.h2>
 
                 <motion.div
                     initial={
-                        shouldReduceMotion ? false : { opacity: 0, x: -100 }
+                        shouldReduceMotion || animationPlayed
+                            ? {}
+                            : { opacity: 0, x: -100 }
                     }
                     animate={
                         showPortfolio && isInView ? { opacity: 1, x: 0 } : {}
@@ -107,7 +112,7 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
                         className="
                             group relative inline-flex items-center overflow-hidden rounded-full border-2 
                             border-electric-blue py-1 px-6 lg:px-12 lg:py-3 text-base lg:text-lg font-semibold text-electric-blue 
-                            transition-all duration-300 hover:text-white mt-8
+                            transition-all duration-300 hover:text-white mt-4 lg:mt-8
                         "
                     >
                         <span
