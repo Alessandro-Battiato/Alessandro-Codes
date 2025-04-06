@@ -1,8 +1,5 @@
 import React, { useRef } from "react";
-
-import { useFrame } from "@react-three/fiber";
-import { extend } from "@react-three/fiber";
-
+import { useFrame, extend } from "@react-three/fiber";
 import {
     useTexture,
     Sphere,
@@ -16,6 +13,8 @@ import earthVertexShader from "@/app/shaders/ContactMe/Earth/vertex.glsl";
 import earthFragmentShader from "@/app/shaders/ContactMe/Earth/fragment.glsl";
 import AtmosphereVertexShader from "@/app/shaders/ContactMe/Atmosphere/vertex.glsl";
 import AtmosphereFragmentShader from "@/app/shaders/ContactMe/Atmosphere/fragment.glsl";
+
+import { useReducedMotion } from "@/app/hooks";
 
 const EarthMaterial = shaderMaterial(
     {
@@ -48,7 +47,10 @@ function Earth() {
     const nightTexture = useTexture("/assets/night.jpg");
     const specularCloudsTexture = useTexture("/assets/specularClouds.jpg");
 
+    const shouldReduceMotion = useReducedMotion();
+
     useFrame(({ clock }) => {
+        if (shouldReduceMotion) return;
         if (ref.current) ref.current.rotation.y = clock.getElapsedTime() * 0.1;
     });
 
@@ -73,8 +75,10 @@ function Atmosphere() {
 
 function SunLight() {
     const ref = useRef<THREE.Group>(null);
+    const shouldReduceMotion = useReducedMotion();
 
     useFrame(({ clock }) => {
+        if (shouldReduceMotion) return;
         const elapsedTime = clock.getElapsedTime();
         const angle = elapsedTime * 0.1; // Opposite to the Earth's
         const radius = 5;
@@ -99,7 +103,6 @@ function SunLight() {
                         const materials = Array.isArray(mesh.material)
                             ? mesh.material
                             : [mesh.material];
-
                         materials.forEach((material) => {
                             if (
                                 (material as THREE.ShaderMaterial).uniforms
@@ -120,12 +123,18 @@ function SunLight() {
 }
 
 export default function ContactMe3D() {
+    const shouldReduceMotion = useReducedMotion();
     return (
         <>
             <ambientLight intensity={0.1} />
             <directionalLight position={[5, 5, 5]} intensity={1.5} />
             <SunLight />
-            <Sparkles count={50} scale={5.5} size={3} speed={0.5} />
+            <Sparkles
+                count={50}
+                scale={5.5}
+                size={3}
+                speed={shouldReduceMotion ? 0 : 0.5}
+            />
             <Earth />
             <Atmosphere />
         </>

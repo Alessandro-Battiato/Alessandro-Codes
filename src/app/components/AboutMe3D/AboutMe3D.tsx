@@ -8,6 +8,7 @@ import vertexShader from "../../shaders/AboutMe/vertex.glsl";
 import fragmentShader from "../../shaders/AboutMe/fragment.glsl";
 
 import { HoverShiftMaterialProps } from "./types";
+import { useReducedMotion } from "@/app/hooks";
 
 const HoverShiftMaterial = shaderMaterial(
     {
@@ -28,6 +29,8 @@ const AboutMe3D = () => {
     const [hovered, setHovered] = useState(false);
     const { pointer, clock } = useThree();
     const hoverStartRef = useRef(0);
+
+    const shouldReduceMotion = useReducedMotion();
 
     const defaultTexture = useLoader(
         THREE.TextureLoader,
@@ -65,6 +68,13 @@ const AboutMe3D = () => {
 
     useFrame(() => {
         if (!materialRef.current) return;
+
+        if (shouldReduceMotion) {
+            materialRef.current.uMousePosition = [0, 0];
+            materialRef.current.uPushForce = 0;
+            materialRef.current.uOverlayFactor = 0;
+            return;
+        }
 
         if (hovered) {
             materialRef.current.uMousePosition = [

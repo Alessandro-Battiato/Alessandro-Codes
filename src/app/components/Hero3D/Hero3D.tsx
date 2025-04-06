@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Float, PerspectiveCamera, useAnimations } from "@react-three/drei";
-import { useGLTFModels, useWindowSize } from "@/app/hooks";
+import { useGLTFModels, useReducedMotion, useWindowSize } from "@/app/hooks";
 
 export default function Hero3D() {
     const {
@@ -12,28 +12,52 @@ export default function Hero3D() {
     });
 
     const { actions } = useAnimations(animations, astronaut);
-
     const { width } = useWindowSize();
+    const shouldReduceMotion = useReducedMotion();
 
     useEffect(() => {
         if (!actions) return;
-        Object.values(actions).forEach((action) => action?.play());
-    }, [actions]);
+
+        if (shouldReduceMotion) {
+            Object.values(actions).forEach((action) => {
+                action?.play();
+                action?.setEffectiveTimeScale(0);
+            });
+        } else {
+            Object.values(actions).forEach((action) => action?.play());
+        }
+    }, [actions, shouldReduceMotion]);
 
     if (width < 992) return null;
 
     return (
         <>
             <PerspectiveCamera makeDefault position={[0, 0, 10]} />
-            <Float speed={2.25} rotationIntensity={0.75} floatIntensity={2.5}>
-                <ambientLight intensity={1} />
-                <primitive
-                    object={astronaut}
-                    position={[-2, -4, -5]}
-                    rotation={[0, Math.PI * 1.3, 0]}
-                    scale={[1, 1, 1]}
-                />
-            </Float>
+            {shouldReduceMotion ? (
+                <>
+                    <ambientLight intensity={1} />
+                    <primitive
+                        object={astronaut}
+                        position={[-2, -4, -5]}
+                        rotation={[0, Math.PI * 1.3, 0]}
+                        scale={[1, 1, 1]}
+                    />
+                </>
+            ) : (
+                <Float
+                    speed={2.25}
+                    rotationIntensity={0.75}
+                    floatIntensity={2.5}
+                >
+                    <ambientLight intensity={1} />
+                    <primitive
+                        object={astronaut}
+                        position={[-2, -4, -5]}
+                        rotation={[0, Math.PI * 1.3, 0]}
+                        scale={[1, 1, 1]}
+                    />
+                </Float>
+            )}
         </>
     );
 }

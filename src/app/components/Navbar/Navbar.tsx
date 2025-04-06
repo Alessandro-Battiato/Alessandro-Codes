@@ -1,6 +1,6 @@
 "use client";
 import React, { useCallback, useEffect, useId, useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
@@ -9,7 +9,10 @@ export default function Navbar() {
     const [isScrolling, setIsScrolling] = useState(false);
     const [hoveredNavItem, setHoveredNavItem] = useState<number | null>(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
     const id = useId();
+
+    const shouldReduceMotion = useReducedMotion();
 
     const handleWheel = useCallback(() => {
         setIsScrolling(true);
@@ -82,13 +85,14 @@ export default function Navbar() {
                                             hoveredNavItem === index ? 1 : 2,
                                     }}
                                 >
-                                    {hoveredNavItem === index && (
-                                        <motion.div
-                                            layoutId={id}
-                                            className="absolute inset-0 -z-10 bg-[#1E2A47]"
-                                            initial={{ borderRadius: 8 }}
-                                        />
-                                    )}
+                                    {!shouldReduceMotion &&
+                                        hoveredNavItem === index && (
+                                            <motion.div
+                                                layoutId={id}
+                                                className="absolute inset-0 -z-10 bg-[#1E2A47]"
+                                                initial={{ borderRadius: 8 }}
+                                            />
+                                        )}
                                     <Link
                                         onMouseEnter={() =>
                                             setHoveredNavItem(index)
@@ -115,9 +119,9 @@ export default function Navbar() {
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
-                        initial={{ x: "100%" }}
-                        animate={{ x: 0 }}
-                        exit={{ x: "100%" }}
+                        initial={shouldReduceMotion ? { x: 0 } : { x: "100%" }}
+                        animate={shouldReduceMotion ? { x: 0 } : { x: 0 }}
+                        exit={shouldReduceMotion ? { x: 0 } : { x: "100%" }}
                         transition={{ type: "tween", duration: 0.3 }}
                         className="fixed top-0 right-0 w-full h-full bg-dark-space z-40"
                     >

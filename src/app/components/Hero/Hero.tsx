@@ -1,14 +1,15 @@
 import React, { useContext, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { PortfolioContext } from "@/app/providers/PortfolioContext/PortfolioContext";
 import Sparkles from "../Sparkles/Sparkles";
 
 const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
     const context = useContext(PortfolioContext);
+    const shouldReduceMotion = useReducedMotion();
     const showPortfolio = context?.showPortfolio ?? false;
 
     const titleRef = useRef(null);
-    const isInView = useInView(titleRef, { amount: 0.5, once: true }); // parameter "once" prevents jitter
+    const isInView = useInView(titleRef, { amount: 0.5, once: true });
 
     return (
         <section
@@ -18,25 +19,37 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
             <div className="flex-1 w-full h-full flex flex-col justify-center items-center text-center">
                 <motion.h1
                     ref={titleRef}
-                    initial={{ opacity: 0, x: -100 }}
+                    initial={
+                        shouldReduceMotion ? false : { opacity: 0, x: -100 }
+                    }
                     animate={
                         showPortfolio && isInView ? { opacity: 1, x: 0 } : {}
                     }
-                    transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+                    transition={
+                        shouldReduceMotion
+                            ? { duration: 0 }
+                            : { duration: 1, delay: 0.5, ease: "easeOut" }
+                    }
                     className="relative w-fit text-3xl lg:text-5xl font-bold"
                 >
                     <motion.span
-                        initial={{ opacity: 0, x: -50 }}
+                        initial={
+                            shouldReduceMotion ? false : { opacity: 0, x: -50 }
+                        }
                         animate={
                             showPortfolio && isInView
                                 ? { opacity: 1, x: 0 }
                                 : {}
                         }
-                        transition={{
-                            duration: 1,
-                            delay: 0.5,
-                            ease: "easeOut",
-                        }}
+                        transition={
+                            shouldReduceMotion
+                                ? { duration: 0 }
+                                : {
+                                      duration: 1,
+                                      delay: 0.5,
+                                      ease: "easeOut",
+                                  }
+                        }
                     >
                         <span className="text-white">I&apos;m </span>
                         <span
@@ -56,26 +69,38 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
                 </motion.h1>
 
                 <motion.h2
-                    initial={{ opacity: 0, x: -50 }}
+                    initial={
+                        shouldReduceMotion ? false : { opacity: 0, x: -50 }
+                    }
                     animate={
                         showPortfolio && isInView ? { opacity: 1, x: 0 } : {}
                     }
-                    transition={{
-                        duration: 1,
-                        delay: 1.5,
-                        ease: "easeOut",
-                    }}
+                    transition={
+                        shouldReduceMotion
+                            ? { duration: 0 }
+                            : {
+                                  duration: 1,
+                                  delay: 1.5,
+                                  ease: "easeOut",
+                              }
+                    }
                     className="mt-4 text-xl lg:text-2xl text-gray-200"
                 >
                     3D <Sparkles color="#FFC700">Creative</Sparkles> Dev
                 </motion.h2>
 
                 <motion.div
-                    initial={{ opacity: 0, x: -100 }}
+                    initial={
+                        shouldReduceMotion ? false : { opacity: 0, x: -100 }
+                    }
                     animate={
                         showPortfolio && isInView ? { opacity: 1, x: 0 } : {}
                     }
-                    transition={{ duration: 1, delay: 2.5 }}
+                    transition={
+                        shouldReduceMotion
+                            ? { duration: 0 }
+                            : { duration: 1, delay: 2.5 }
+                    }
                 >
                     <a
                         href="#contact"

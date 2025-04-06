@@ -10,6 +10,16 @@
     background-color: #0a0527;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 @layer base {
     :root {
         --background: 0 0% 100%;

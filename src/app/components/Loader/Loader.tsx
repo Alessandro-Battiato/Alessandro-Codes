@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useProgress } from "@react-three/drei";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { LoaderProps } from "./types";
 
 const Loader: React.FC<LoaderProps> = ({ isSceneReady }) => {
@@ -9,17 +9,20 @@ const Loader: React.FC<LoaderProps> = ({ isSceneReady }) => {
     const [displayedProgress, setDisplayedProgress] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
     const [dotCount, setDotCount] = useState(1);
+    const shouldReduceMotion = useReducedMotion();
 
     useEffect(() => {
         setDisplayedProgress((prev) => (progress > prev ? progress : prev));
     }, [progress]);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setDotCount((prev) => (prev === 3 ? 1 : prev + 1));
-        }, 500);
-        return () => clearInterval(interval);
-    }, []);
+        if (!shouldReduceMotion) {
+            const interval = setInterval(() => {
+                setDotCount((prev) => (prev === 3 ? 1 : prev + 1));
+            }, 500);
+            return () => clearInterval(interval);
+        }
+    }, [shouldReduceMotion]);
 
     useEffect(() => {
         if (displayedProgress >= 99.9 && isSceneReady) {
@@ -33,14 +36,19 @@ const Loader: React.FC<LoaderProps> = ({ isSceneReady }) => {
     const animatedDots = Array.from({ length: 3 }, (_, i) => (
         <motion.span
             key={i}
-            animate={{
-                y: dotCount === i + 1 ? [0, -10, 0] : 0,
-                opacity: dotCount === i + 1 ? 1 : 0.3,
-            }}
-            transition={{
-                duration: 0.3,
-                ease: "easeOut",
-            }}
+            animate={
+                shouldReduceMotion
+                    ? { y: 0, opacity: 1 }
+                    : {
+                          y: dotCount === i + 1 ? [0, -10, 0] : 0,
+                          opacity: dotCount === i + 1 ? 1 : 0.3,
+                      }
+            }
+            transition={
+                shouldReduceMotion
+                    ? { duration: 0 }
+                    : { duration: 0.3, ease: "easeOut" }
+            }
             style={{
                 display: "inline-block",
                 fontSize: "3rem",
