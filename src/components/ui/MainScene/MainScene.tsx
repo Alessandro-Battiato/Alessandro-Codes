@@ -9,7 +9,7 @@ import {
 } from "@/hooks";
 import { PortfolioProvider } from "@/providers/PortfolioContext/PortfolioContext";
 import { MainSceneProps } from "./types";
-import { Loader } from "@/components/ui";
+import { Loader, ScrollHint } from "@/components/ui";
 
 const SceneRenderer = dynamic(
     () => import("@/components/ui").then((mod) => mod.SceneRenderer),
@@ -27,6 +27,7 @@ const MainScene = ({ children }: MainSceneProps) => {
     const resistanceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
     const portfolioTouchStartRef = useRef<number | null>(null);
+    const scrollHintShownRef = useRef(false);
 
     const { scrollProgress, smoothScroll, showPortfolio, setShowPortfolio } =
         useScrollProgress();
@@ -200,6 +201,18 @@ const MainScene = ({ children }: MainSceneProps) => {
                 aria-modal="true"
                 aria-label="Portfolio Overlay"
             >
+                {showPortfolio &&
+                    isPortfolioInteractive &&
+                    !scrollHintShownRef.current && (
+                        <ScrollHint
+                            isSceneReady={true}
+                            variant="top"
+                            onShown={() => {
+                                scrollHintShownRef.current = true;
+                            }}
+                        />
+                    )}
+
                 <PortfolioProvider showPortfolio={showPortfolio}>
                     {children}
                 </PortfolioProvider>
