@@ -9,19 +9,20 @@ const ProjectCard = ({
     imgUrl,
     title,
     subtitle,
-    // href,
+    href,
     cta,
 }: ProjectCardProps) => {
     return (
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-start max-w-[500px]">
             <Lens>
-                <Image
-                    src={imgUrl}
-                    className="rounded-lg"
-                    alt="project preview image"
-                    width={500}
-                    height={300}
-                />
+                <div className="w-[500px] h-[240px] rounded-lg overflow-hidden">
+                    <Image
+                        src={imgUrl}
+                        alt="project preview"
+                        fill
+                        className="object-cover"
+                    />
+                </div>
             </Lens>
             <h3 className="mt-6 mb-2 text-gray-100 text-xl lg:text-2xl font-bold leading-relaxed">
                 {title}
@@ -30,8 +31,7 @@ const ProjectCard = ({
                 {subtitle}
             </p>
             <Link
-                // href={href} USE ONCE PROJECTS CASE STUDY PAGES ARE READY
-                href="#"
+                href={href}
                 className="relative text-sm lg:text-base group uppercase font-semibold text-gray-300 hover:text-white transition-colors duration-300 flex items-center"
             >
                 {cta}

@@ -4,11 +4,12 @@ import { ProjectCard } from "@/components/ui";
 
 const projects = [
     {
-        title: "Lorem Ipsum",
-        subtitle: "Lorem Ipsum",
+        title: "Fitness Coach",
+        subtitle:
+            "A fitness-focused website leveraging Three.js to render an interactive 3D human model that gives athletes a brief overview for each exercise.",
         cta: "View project",
-        href: "project1",
-        imgUrl: "/assets/test.jpg",
+        href: "fitnessCoach",
+        imgUrl: "/assets/fitnessCoach.png",
     },
     {
         title: "Lorem Ipsum",
