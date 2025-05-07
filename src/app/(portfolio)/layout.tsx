@@ -1,11 +1,16 @@
 import React from "react";
 
-import { MainScene } from "@/components/ui";
+import { Footer, MainScene } from "@/components/ui";
 
 export default function PortfolioLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
-    return <MainScene>{children}</MainScene>;
+    return (
+        <MainScene>
+            <>{children}</>
+            <Footer />
+        </MainScene>
+    );
 }

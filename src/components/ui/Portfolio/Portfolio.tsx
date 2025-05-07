@@ -16,7 +16,6 @@ import {
     Projects,
     Blog,
     ContactMe,
-    Footer,
 } from "@/components/ui";
 
 const Portfolio = () => {
@@ -70,8 +69,6 @@ const Portfolio = () => {
 
                 <ContactMe ref={contactMeRef} />
             </main>
-
-            <Footer />
         </>
     );
 };

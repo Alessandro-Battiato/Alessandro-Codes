@@ -6,6 +6,7 @@ export { default as Blog } from "@/components/ui/Blog/Blog";
 export { default as ContactMe } from "@/components/ui/ContactMe/ContactMe";
 export { default as ContactMe3D } from "@/components/ui/ContactMe3D/ContactMe3D";
 export { default as DownloadButton } from "@/components/ui/DownloadButton/DownloadButton";
+export { default as BackButton } from "@/components/ui/BackButton/BackButton";
 export { default as Footer } from "@/components/ui/Footer/Footer";
 export { default as Hero } from "@/components/ui/Hero/Hero";
 export { default as Hero3D } from "@/components/ui/Hero3D/Hero3D";

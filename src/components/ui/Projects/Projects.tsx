@@ -1,31 +1,7 @@
 import React from "react";
 
 import { ProjectCard } from "@/components/ui";
-
-const projects = [
-    {
-        title: "Fitness Coach",
-        subtitle:
-            "A fitness-focused website leveraging Three.js to render an interactive 3D human model that gives athletes a brief overview for each exercise.",
-        cta: "View project",
-        href: "fitnessCoach",
-        imgUrl: "/assets/fitnessCoach.png",
-    },
-    {
-        title: "Lorem Ipsum",
-        subtitle: "Lorem Ipsum",
-        cta: "View project",
-        href: "project2",
-        imgUrl: "/assets/test.jpg",
-    },
-    {
-        title: "Lorem ipsum",
-        subtitle: "Lorem ipsum",
-        cta: "Coming soon!",
-        href: "project3",
-        imgUrl: "/assets/test.jpg",
-    },
-];
+import { projects } from "@/data/projects";
 
 const Projects = () => {
     return (

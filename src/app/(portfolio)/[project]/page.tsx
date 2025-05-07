@@ -1,15 +1,12 @@
-// TO DO: Case study page dedicated to a single project
 import React from "react";
-
+import Image from "next/image";
 import { notFound } from "next/navigation";
+import { BackButton } from "@/components/ui";
+import ProjectDetail from "@/components/ui/ProjectDetail/ProjectDetail";
+import { detailedProjectsData } from "@/data/projects";
 
 export async function generateStaticParams() {
-    // Valid projects list
-    return [
-        { project: "project1" },
-        { project: "project2" },
-        { project: "project3" },
-    ];
+    return detailedProjectsData.map((p) => ({ project: p.slug }));
 }
 
 export default function ProjectPage({
@@ -17,15 +14,28 @@ export default function ProjectPage({
 }: {
     params: { project: string };
 }) {
-    const validProjects = ["project1", "project2", "project3"];
+    const projectData = detailedProjectsData.find(
+        (p) => p.slug === params.project
+    );
 
-    if (!validProjects.includes(params.project)) {
+    if (!projectData) {
         notFound();
     }
 
     return (
-        <div>
-            <h1>Case Study: {params.project}</h1>
-        </div>
+        <article className="min-h-screen relative -z-10 bg-dark-space text-gray-100">
+            <BackButton />
+
+            <div className="fixed inset-0 -z-20 w-full h-full pointer-events-none">
+                <Image
+                    src="/assets/background.svg"
+                    alt="background image"
+                    fill
+                    className="blur-[100px] object-cover"
+                />
+            </div>
+
+            <ProjectDetail {...projectData} />
+        </article>
     );
 }
