@@ -10,6 +10,7 @@ const ProjectDetail = ({
     description,
     stack,
     href,
+    sourceCodeLink,
     projectPurpose,
     webStackExplanation,
     thoughtProcess,
@@ -41,7 +42,7 @@ const ProjectDetail = ({
                     </div>
                     <div className="flex flex-col gap-4">
                         <span className="font-bold uppercase text-gray-100">
-                            Live
+                            Live & Code
                         </span>
                         <a
                             href={href}
@@ -50,6 +51,14 @@ const ProjectDetail = ({
                             className="text-electric-blue font-bold hover:text-electric-pink"
                         >
                             View Site
+                        </a>
+                        <a
+                            href={sourceCodeLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-electric-blue font-bold hover:text-electric-pink"
+                        >
+                            View Repository
                         </a>
                     </div>
                 </div>
@@ -75,8 +84,8 @@ const ProjectDetail = ({
                 <p className="text-gray-300">{projectPurpose}</p>
             </section>
 
-            <section className="flex flex-col md:flex-row items-start gap-12">
-                <div className="flex-1 flex flex-col md:flex-row items-start gap-8">
+            <section className="flex flex-col md:flex-row items-start md:items-center gap-12">
+                <div className="flex-1 flex flex-col md:flex-row items-start md:items-center gap-8">
                     <ul className="font-semibold text-gray-100 grid grid-cols-1 md:grid-cols-2 gap-y-4 md:gap-x-12">
                         {stack.map((el, idx) => {
                             const Icon = el.icon;

@@ -1,14 +1,14 @@
 import {
-    SiReact,
     SiTypescript,
     SiTailwindcss,
     SiVite,
     SiNetlify,
     SiReactquery,
+    SiThreedotjs,
 } from "react-icons/si";
 
 export const ICONS = {
-    react: SiReact,
+    reactThreeFiber: SiThreedotjs,
     typescript: SiTypescript,
     tailwind: SiTailwindcss,
     vite: SiVite,

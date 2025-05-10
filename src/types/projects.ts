@@ -19,6 +19,7 @@ export interface ProjectDetailData {
     description: string;
     stack: TechStackItem[];
     href: string;
+    sourceCodeLink: string;
     projectPurpose: string;
     webStackExplanation: string;
     firstAsset: string;
