@@ -10,6 +10,8 @@ const ProjectDetail = ({
     description,
     stack,
     href,
+    projectPurpose,
+    webStackExplanation,
     thoughtProcess,
     takeaway,
     firstAsset,
@@ -70,7 +72,7 @@ const ProjectDetail = ({
                 <h2 className="text-2xl font-semibold mb-8">
                     Project Purpose and Goal
                 </h2>
-                <p className="text-gray-300">…lorem ipsum</p>
+                <p className="text-gray-300">{projectPurpose}</p>
             </section>
 
             <section className="flex flex-col md:flex-row items-start gap-12">
@@ -98,7 +100,7 @@ const ProjectDetail = ({
                     <h2 className="text-2xl font-semibold mb-8">
                         Web Stack and Explanation
                     </h2>
-                    <p className="text-gray-300">…lorem ipsum</p>
+                    <p className="text-gray-300">{webStackExplanation}</p>
                 </div>
             </section>
 
