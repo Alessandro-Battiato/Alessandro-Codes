@@ -13,7 +13,7 @@ export const metadata = {
         siteName: "AlessandroCodes",
         images: [
             {
-                url: "https://www.alessandrocodes.com/assets/openGraphImage.PNG",
+                url: "https://alessandrocodes.netlify.app/assets/openGraphImage.PNG",
                 width: 1200,
                 height: 630,
                 alt: "3D Portfolio of Alessandro Battiato",
