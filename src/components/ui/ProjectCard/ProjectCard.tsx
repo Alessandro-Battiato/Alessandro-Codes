@@ -15,11 +15,12 @@ const ProjectCard = ({
     return (
         <div className="flex flex-col items-start max-w-[500px]">
             <Lens>
-                <div className="w-[500px] h-[240px] rounded-lg overflow-hidden">
+                <div className="relative w-[325px] sm:w-[500px] h-[240px] rounded-lg overflow-hidden">
                     <Image
                         src={imgUrl}
                         alt="project preview"
                         fill
+                        sizes="(max-width: 639px) 325px, 500px"
                         className="object-cover"
                     />
                 </div>
