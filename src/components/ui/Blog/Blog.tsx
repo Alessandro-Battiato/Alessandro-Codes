@@ -18,9 +18,11 @@ const articles = [
         href: "https://codinghue.com/posts/NextVsReact",
     },
     {
-        title: "Work in Progress!",
-        subtitle: "Stay tuned for more content!",
-        cta: "Coming soon!",
+        title: "The Core React Loop",
+        subtitle:
+            "This article dives deep into the Core React Loop, explaining how state snapshots, reconciliation, and React’s internal element representation power dynamic, efficient UIs.",
+        cta: "Read article",
+        href: "https://codinghue.com/posts/coreReactLoop",
     },
 ];
 
