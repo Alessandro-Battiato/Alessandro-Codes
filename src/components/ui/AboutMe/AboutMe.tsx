@@ -66,10 +66,10 @@ const AboutMe = React.forwardRef<HTMLDivElement>(({}, ref) => {
                         About me
                     </h2>
                     <p className="text-gray-200 text-sm lg:text-base leading-relaxed mb-4">
-                        Hi there! I’m Alessandro Battiato, a passionate
-                        Front-End Web Developer always trying to bring a spark
+                        Hi there! I'm Alessandro Battiato, a passionate
+                        Full-Stack Web Developer always trying to bring a spark
                         of joy to my projects. Ever since I first started
-                        surfing the web, I’ve been curious about how everything
+                        surfing the web, I've been curious about how everything
                         works, how people build such things. For instance,
                         whenever I came across blog articles with whimsical
                         animations and interactions, my interest (along with a
@@ -90,10 +90,11 @@ const AboutMe = React.forwardRef<HTMLDivElement>(({}, ref) => {
                         </a>{" "}
                         trapping the protagonists not only made me hold my
                         breath, but also reignited the same spark and growing
-                        curiosity I had felt years ago. That’s when I realized I
-                        could bring this kind of 3D animation into my work
-                        through Three.js, which led me to become a 3D Creative
-                        Developer!
+                        curiosity I had felt years ago. That moment pushed me to explore 3D on the web with Three.js as a creative playground, 
+                        and funnily enough, diving into that complexity made me realize something bigger: 
+                        I enjoy taking responsibility for the entire technical stack, not just the visuals. 
+                        Since then, I've shifted my focus towards full-stack development, 
+                        while still keeping 3D as a space where I experiment and have fun!
                     </p>
                     <p className="text-gray-200 text-sm lg:text-base leading-relaxed">
                         Curious to see what I can build? Check out my resume

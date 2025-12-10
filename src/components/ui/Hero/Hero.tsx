@@ -90,7 +90,7 @@ const Hero = React.forwardRef<HTMLDivElement>(({}, ref) => {
                     }
                     className="mt-2 lg:mt-4 text-xl lg:text-2xl text-gray-200"
                 >
-                    3D <Sparkles color="#FFC700">Creative</Sparkles> Dev
+                    <Sparkles color="#FFC700">Full-Stack</Sparkles> Developer
                 </motion.h2>
 
                 <motion.div

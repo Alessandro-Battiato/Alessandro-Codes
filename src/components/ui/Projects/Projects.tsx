@@ -11,7 +11,7 @@ const Projects = () => {
                     Recent projects
                 </h2>
                 <p className="text-gray-200 text-sm lg:text-base leading-relaxed">
-                    I enjoy keeping myself occupied, which is why I&apos;m
+                    I enjoy keeping myself busy, which is why I&apos;m
                     always working on something. <br />
                     Feel free to explore some of my best projects!
                 </p>

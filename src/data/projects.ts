@@ -19,12 +19,12 @@ export const projects: Project[] = [
         imgUrl: "/assets/taskHive.png",
     },
     {
-        title: "Qube Fall",
+        title: "Coming soon!",
         subtitle:
-            "Qube Fall is my take on recreating Fluffy Fall, a game I loved a lot growing up, using the power of React Three Fiber and Rapier!",
+            "Stay tuned!",
         cta: "Coming soon!",
         href: "/",
-        imgUrl: "/assets/fluffyFall.png",
+        imgUrl: "/assets/gpt.jpg",
     },
 ];
 
