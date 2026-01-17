@@ -28,7 +28,7 @@ const ProjectCard = ({
             <h3 className="mt-6 mb-2 text-gray-100 text-xl lg:text-2xl font-bold leading-relaxed">
                 {title}
             </h3>
-            <p className="mb-3 text-gray-300 text-sm lg:text-base leading-relaxed">
+            <p className="mb-3 min-h-[72px] text-gray-300 text-sm lg:text-base leading-relaxed">
                 {subtitle}
             </p>
             <Link

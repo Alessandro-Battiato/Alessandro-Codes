@@ -5,7 +5,7 @@ const Footer = () => {
         <section className="p-8 bg-dark-space text-gray-200">
             <footer className="text-center">
                 <p className="text-sm">
-                    © 2025 AlessandroCodes, All rights reserved
+                    © 2026 AlessandroCodes, All rights reserved
                 </p>
             </footer>
         </section>

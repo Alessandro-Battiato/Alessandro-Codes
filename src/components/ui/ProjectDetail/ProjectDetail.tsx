@@ -62,7 +62,7 @@ const ProjectDetail = ({
                         </a>
                     </div>
                 </div>
-                <div className="relative w-full h-[20vh] md:h-[60vh] overflow-hidden rounded-lg">
+                <div className="relative w-full h-[20vh] md:h-[40vh] overflow-hidden rounded-lg">
                     <Image
                         src={firstAsset}
                         alt="Feature 1"
@@ -70,8 +70,6 @@ const ProjectDetail = ({
                         className="
                             object-left
                             object-contain 
-                            lg:object-cover
-                            lg:object-center
                         "
                     />
                 </div>
@@ -115,7 +113,7 @@ const ProjectDetail = ({
 
             <section>
                 <div className="flex flex-col md:flex-row gap-6">
-                    <div className="w-full md:h-[30vh] relative overflow-hidden">
+                    <div className="w-full relative overflow-hidden">
                         <Image
                             src={secondAsset}
                             alt="Feature 2"
@@ -124,7 +122,7 @@ const ProjectDetail = ({
                             className="object-cover"
                         />
                     </div>
-                    <div className="w-full md:h-[30vh] relative overflow-hidden">
+                    <div className="w-full relative overflow-hidden">
                         <Image
                             src={thirdAsset}
                             alt="Feature 3"

@@ -86,16 +86,16 @@ const SceneRenderer = ({ smoothScroll, onSceneReady }: SceneRendererProps) => {
                     />
                     <Html
                         transform
-                        rotation-x={-0.175}
+                        rotation-x={-0.185}
                         position={[
                             0,
-                            -1.625 * scaleFactor,
+                            -1.525 * scaleFactor,
                             -9.85 * scaleFactor,
                         ]}
                     >
                         <div style={{ transform: `scale(${scaleFactor})` }}>
                             <video
-                                className="w-52"
+                                className="w-52 scale-y-[1.03] origin-top"
                                 autoPlay
                                 loop
                                 muted
