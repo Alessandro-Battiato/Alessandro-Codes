@@ -66,10 +66,10 @@ const AboutMe = React.forwardRef<HTMLDivElement>(({}, ref) => {
                         About me
                     </h2>
                     <p className="text-gray-200 text-sm lg:text-base leading-relaxed mb-4">
-                        Hi there! I'm Alessandro Battiato, a passionate
+                        Hi there! I&apos;m Alessandro Battiato, a passionate
                         Full-Stack Web Developer always trying to bring a spark
                         of joy to my projects. Ever since I first started
-                        surfing the web, I've been curious about how everything
+                        surfing the web, I&apos;ve been curious about how everything
                         works, how people build such things. For instance,
                         whenever I came across blog articles with whimsical
                         animations and interactions, my interest (along with a
@@ -93,7 +93,7 @@ const AboutMe = React.forwardRef<HTMLDivElement>(({}, ref) => {
                         curiosity I had felt years ago. That moment pushed me to explore 3D on the web with Three.js as a creative playground, 
                         and funnily enough, diving into that complexity made me realize something bigger: 
                         I enjoy taking responsibility for the entire technical stack, not just the visuals. 
-                        Since then, I've shifted my focus towards full-stack development, 
+                        Since then, I&apos;ve shifted my focus towards full-stack development, 
                         while still keeping 3D as a space where I experiment and have fun!
                     </p>
                     <p className="text-gray-200 text-sm lg:text-base leading-relaxed">
