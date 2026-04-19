@@ -19,12 +19,12 @@ export const projects: Project[] = [
         imgUrl: "/assets/taskHive.png",
     },
     {
-        title: "Coming soon!",
+        title: "Aether",
         subtitle:
-            "Stay tuned!",
-        cta: "Coming soon!",
-        href: "/",
-        imgUrl: "/assets/gpt.jpg",
+            "A full-stack AI chat application powered by OpenRouter. Supports real-time streaming responses, multiple AI models, and persistent conversation history.",
+        cta: "View project",
+        href: "aether",
+        imgUrl: "/assets/aether.png",
     },
 ];
 
@@ -83,4 +83,31 @@ export const detailedProjectsData: ProjectDetailData[] = [
         takeaway:
             "This project really strengthened my skills and gave me a deeper appreciation for test-driven development, thanks to Cypress catching issues early on. Above all, TaskHive showed me how important it is to have solid structure and developer-friendly tools when building apps that need to scale or handle growing complexity, as the potential of such projects is enormous and having tools like these is essential to support development at scale.",
     },
+    {
+        slug: "aether",
+        title: "Aether",
+        description:
+            "Aether is a full-stack AI chat application inspired by ChatGPT. Users can register, log in, and manage multiple conversations from a collapsible sidebar, switch between AI models powered by OpenRouter, and receive responses in real time. The interface is fully responsive: on desktop the sidebar collapses to an icon, while on mobile it slides in as a drawer. The backend exposes a REST API secured with JWT stored in httpOnly cookies, backed by PostgreSQL through Prisma and deployed on Railway.",
+        stack: [
+            { name: "TypeScript", icon: ICONS.typescript },
+            { name: "Redux Toolkit", icon: ICONS.redux },
+            { name: "Shadcn/UI", icon: ICONS.shadcn },
+            { name: "Vite", icon: ICONS.vite },
+            { name: "Railway", icon: ICONS.railway },
+            { name: "Prisma", icon: ICONS.prisma },
+        ],
+        href: "https://ab-aether.netlify.app/",
+        sourceCodeLink: "https://github.com/Alessandro-Battiato/Aether",
+        projectPurpose:
+            "I wanted to build a production-ready, full-stack application from the ground up rather than just a front-end showcase. Recreating a ChatGPT-style product forced me to tackle things I had never dealt with before: streaming responses via Server-Sent Events (SSE), cross-origin cookie authentication, a relational data model with user-owned conversations, and a live deployed backend with a real database. Another key goal was to evolve my development workflow by integrating an AI agent into the process. I built the project using Claude Code, working with an agent capable of handling scoped context across separate client and server codebases. This allowed me to move beyond simply using AI as a prompt-based assistant, toward a more AI-native approach where I could orchestrate, guide, and iterate with the agent as part of the development loop. The goal was to prove to myself that I could own the entire stack, from schema design to a polished, responsive UI, while also deepening my ability to effectively collaborate with AI as a development tool and ship it as a working product.",
+        webStackExplanation:
+            "On the front end I stayed with the Vite and TypeScript combination I was already comfortable with, and chose Redux Toolkit for predictable, well-structured state management across auth, chat lists, and streaming content. On the backend I used Express, Prisma, and PostgreSQL to build a simple and type-safe API. For the AI layer, I integrated OpenRouter to access multiple models through a single endpoint. The client is deployed on Netlify and the server on Railway, each with its own environment configuration.",
+        firstAsset: "/assets/aether.png",
+        secondAsset: "/assets/aetherFirstAsset.png",
+        thirdAsset: "/assets/aetherSecondAsset.png",
+        thoughtProcess:
+            "The two hardest problems were streaming and production authentication. For streaming, I used Server-Sent Events (SSE) with the fetch-event-source client instead of Axios, so I could handle incremental updates as they arrive and push the streamed tokens directly into a Redux slice that StreamingBubble reads in real time. Each token appends to a content buffer and a blinking cursor provides immediate visual feedback; when the done event arrives, optimistic messages are replaced with server-confirmed ones and the chat list refreshes to pick up the auto-generated title. Authentication looked straightforward until I deployed: httpOnly cookies set with SameSite=Strict are silently dropped by browsers on cross-origin requests, so every protected API call returned 401 even after a successful login. Switching to SameSite=None with Secure in production fixed the sending side, but then logout was broken because clearCookie without matching attributes is ignored by the browser for the same reason. Getting both sides right required understanding the exact rules browsers apply when matching Set-Cookie headers.",
+        takeaway:
+            "Aether is the project that really made me comfortable calling myself a full-stack developer. Owning the whole stack, from database migrations and auth to real-time streaming and a React client, helped me understand how each layer impacts the others in a way front-end-only work never did. Debugging production issues around cookies and CORS was frustrating, but it gave me a much clearer mental model of how browsers enforce security and why environment differences matter so much.",
+    }
 ];

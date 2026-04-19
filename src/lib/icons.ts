@@ -7,6 +7,9 @@ import {
     SiThreedotjs,
     SiDaisyui,
     SiRedux,
+    SiPrisma,
+    SiRailway,
+    SiShadcnui
 } from "react-icons/si";
 
 export const ICONS = {
@@ -18,4 +21,7 @@ export const ICONS = {
     reactQuery: SiReactquery,
     daisyui: SiDaisyui,
     redux: SiRedux,
+    prisma: SiPrisma,
+    railway: SiRailway,
+    shadcn: SiShadcnui
 } as const;
