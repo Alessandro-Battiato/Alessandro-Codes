@@ -8,21 +8,21 @@ const articles = [
         subtitle:
             "A short, step-by-step tutorial featuring interactive code snippets that demonstrate how to create smooth, engaging transitions with Framer Motion, effectively working as a splash screen. This is a technique I have directly applied in my current professional work.",
         cta: "Read article",
-        href: "https://codinghue.com/posts/framerMotion",
+        href: "https://codinghue.netlify.app/posts/framerMotion",
     },
     {
         title: "Shedding some light on Next.js and React.js",
         subtitle:
             "A brief comparison between Next.js and React, highlighting their key differences and when each is the optimal choice for your projects.",
         cta: "Read article",
-        href: "https://codinghue.com/posts/NextVsReact",
+        href: "https://codinghue.netlify.app/posts/NextVsReact",
     },
     {
         title: "The Core React Loop",
         subtitle:
             "This article dives deep into the Core React Loop, explaining how state snapshots, reconciliation, and React’s internal element representation power dynamic, efficient UIs.",
         cta: "Read article",
-        href: "https://codinghue.com/posts/coreReactLoop",
+        href: "https://codinghue.netlify.app/posts/coreReactLoop",
     },
 ];
 
